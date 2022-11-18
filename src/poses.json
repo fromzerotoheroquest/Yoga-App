@@ -1,0 +1,65 @@
+[
+  {
+    "id": 1,
+    "english": "Mountain Pose",
+    "sanskrit": "Tadasana",
+    "category": "standing",
+    "image": "mountain.svg",
+    "counterpose": [
+      {
+        "id": 2,
+        "english": "Corpse Pose",
+        "sanskrit": "Savasana",
+        "category": "reclining",
+        "image": "corpse.svg"
+      },
+      {
+        "id": 3,
+        "english": "Downward facing dog",
+        "sanskrit": "Adho Mukha Svanasana",
+        "category": "reclining",
+        "image": "downdog.svg"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "english": "Corpse Pose",
+    "sanskrit": "Savasana",
+    "category": "reclining",
+    "image": "corpse.svg",
+    "counterpose": []
+  },
+  {
+    "id": 3,
+    "english": "Downward facing dog",
+    "sanskrit": "Adho Mukha Svanasana",
+    "category": "inversion",
+    "image": "downdog.svg",
+    "counterpose": [
+      {
+        "id": 4,
+        "english": "Upward facing dog",
+        "sanskrit": "Urdhva Mukha Svanasana",
+        "category": "back bend",
+        "image": "updog.svg"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "english": "Upward facing dog",
+    "sanskrit": "Urdhva Mukha Svanasana",
+    "category": "back bend",
+    "image": "updog.svg",
+    "counterpose": [
+      {
+        "id": 3,
+        "english": "Downward facing dog",
+        "sanskrit": "Adho Mukha Svanasana",
+        "category": "inversion",
+        "image": "downdog.svg"
+      }
+    ]
+  }
+]

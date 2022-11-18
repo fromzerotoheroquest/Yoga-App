@@ -1,0 +1,46 @@
+#poses, #plan {
+  display: flex;
+}
+#plan {
+  border: 1px dashed grey;
+  padding: 5px;
+}
+
+#plan div, #poses div {
+  padding: 5px;
+
+}
+
+
+.pose .english, .counter-pose .english {
+  color: rgb(206, 89, 173);
+}
+
+.illustration img {
+  width: 100px;
+}
+
+.add-btn, .del-btn {
+  cursor: pointer;
+}
+
+.add-btn  {
+  color: rgb(33, 186, 200);
+}
+
+.del-btn {
+  color: rgb(181, 24, 24);
+}
+
+.counter-wrapper {
+  background-color: rgb(234, 234, 234);
+  padding:5px;
+}
+
+.counter-wrapper span {
+  font-size:12px;
+}
+
+#sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+#sortable li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 18px; }
+#sortable li span { position: absolute; margin-left: -1.3em; }
