@@ -16,15 +16,10 @@ async function loadPoses() {
 
 loadPoses().then(() => {
 
-  $("#poses").append(
-    `<div id="filter">
-    <span>Filter:</span>
-      </div>`
-  )
   for (let i = 0; i < poses.length; i++) {
     $("#filter").append(
 
-      `<span class="category">${poses[i].category}</span>`
+      `<span class="category">${poses[i].category} &nbsp;</span>`
     )
     $("#poses").append(
       `<div id="pose-${poses[i].id}" class="pose ${poses[i].category}">
@@ -55,6 +50,8 @@ loadPoses().then(() => {
         $(this).parent().remove()
       })
     })
+
+    //counter poses
     for (let j = 0; j < poses[i].counterpose.length; j++) {
 
       $(`#pose-${poses[i].id} .counter-wrapper`).append(
@@ -80,7 +77,7 @@ loadPoses().then(() => {
   }
 })
 
-
+// to sort, drag and drop in plan section
   $( "#plan" ).sortable(); 
 
 
