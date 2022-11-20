@@ -1,30 +1,80 @@
-#poses, #plan {
+html,
+body {
+  margin: 0;
+  font-size: calc(16px+1vw)
+}
+
+#logo {
+  margin-top: 50px;
   display: flex;
+  justify-content: center;
 }
-#plan {
-  border: 1px dashed grey;
+
+#logo img {
+  width: 250px;
+}
+
+main {
   padding: 5px;
 }
-
-#plan div, #poses div {
-  padding: 5px;
-
+/* poses */
+#poses{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
 }
-
-
-.pose .english, .counter-pose .english {
-  color: rgb(206, 89, 173);
-}
-
 .illustration img {
   width: 100px;
 }
 
-.add-btn, .del-btn {
+.pose .sanskrit {
+  font-size: 12px
+}
+
+.pose .category {
+  font-size: 12px;
+  color: #7e7e7e;
+}
+
+/* plan */
+#plan {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding: 5px;
+}
+#plan .pose {display:none}
+
+#plan div,
+#poses div {
+  padding: 5px;
+
+}
+
+.pose,
+.counter-pose {
+  margin: 3px;
+  background-color: #f3f3f3;
+  border-radius: 10px;
+}
+
+.pose .english,
+.counter-pose .english {
+  color: rgb(206, 89, 173);
+}
+
+.illustration img {
+  width: 100%;
+  min-width: 150px;
+  max-height: 150px;
+}
+
+/* buttons */
+.add-btn,
+.del-btn,
+.counter-btn {
   cursor: pointer;
 }
 
-.add-btn  {
+.add-btn {
   color: rgb(33, 186, 200);
 }
 
@@ -32,15 +82,62 @@
   color: rgb(181, 24, 24);
 }
 
+
 .counter-wrapper {
+  display:none;
   background-color: rgb(234, 234, 234);
-  padding:5px;
+  padding: 5px;
 }
 
 .counter-wrapper span {
-  font-size:12px;
+  font-size: 12px;
 }
 
-#sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
-#sortable li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 18px; }
-#sortable li span { position: absolute; margin-left: -1.3em; }
+
+/* media queries breakpoints */
+@media (width <=600px) {}
+
+@media (600px < width <=960px) {
+  body {
+    background-color: rgb(250, 89, 89);
+  }
+
+  #poses,
+  #plan {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+
+}
+
+@media (960px < width <=1264px) {
+  body {
+    background-color: rgb(136, 136, 253);
+  }
+
+  #poses,
+  #plan {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}
+
+@media (1264px < width <=1904px) {
+  body {
+    background-color: rgb(137, 255, 137);
+  }
+
+  #poses,
+  #plan {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  }
+}
+
+@media (1904px < width) {
+  body {
+    background-color: rgb(255, 215, 141);
+  }
+
+  #poses,
+  #plan {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  }
+}

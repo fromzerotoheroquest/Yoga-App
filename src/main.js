@@ -27,29 +27,45 @@ loadPoses().then(() => {
         <div class="english">${poses[i].english} </div>
         <div class="sanskrit">(${poses[i].sanskrit}) </div>
         <div class="category">Category: ${poses[i].category} </div>
-        <div id="add-pose-${poses[i].id}" class="add-btn"> + add </div>
+        <div id="add-pose-${poses[i].id}" class="add-btn"> <b>+</b> add </div>
        </div>`
     );
     // just to show it if there is any counter pose
     if (poses[i].counterpose.length > 0) {
       $(`#pose-${poses[i].id}`).append(
-        `<div class="counter-wrapper" > <span>Counter pose:</span> </div>`
+        `
+        <span id="pose-${poses[i].id}-counter-btn" class="counter-btn">Counter pose: <b>⇅</b></span>
+        <div class="counter-wrapper" ></div>
+        `
       )
     }
     // interaction
+    // add buttons
     $(`#add-pose-${poses[i].id}`).click(function () {
       $("#plan").append(
         `<div class="pose">
-          <div class="illustration"><img src="assets/poses/${poses[i].image}"/></div>
-          <div class="english">${poses[i].english} </div>
-          <div class="sanskrit">(${poses[i].sanskrit}) </div>
-          <div class="del-btn" /> ✖ del </div>
-          </div>`
+        <div class="illustration"><img src="assets/poses/${poses[i].image}"/></div>
+        <div class="english">${poses[i].english} </div>
+        <div class="sanskrit">(${poses[i].sanskrit}) </div>
+        <div class="del-btn" /> ✖ del </div>
+        </div>`
       )
       $(".del-btn").click(function () {
-        $(this).parent().remove()
+        $(this).parent().fadeOut(function () {
+          $(this).remove()
+        } )
       })
+      $('.pose').fadeIn()
+
     })
+
+    //counter poses buttons
+    $(`#pose-${poses[i].id}-counter-btn`).click(function () {
+      console.log('click')
+      $(`#pose-${poses[i].id} .counter-wrapper`).slideToggle()
+    })
+
+
 
     //counter poses
     for (let j = 0; j < poses[i].counterpose.length; j++) {
@@ -78,7 +94,7 @@ loadPoses().then(() => {
 })
 
 // to sort, drag and drop in plan section
-  $( "#plan" ).sortable(); 
+$("#plan").sortable();
 
 
 // console.log (poses)
