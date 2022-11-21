@@ -41,7 +41,7 @@
         "id": 4,
         "english": "Upward facing dog",
         "sanskrit": "Urdhva Mukha Svanasana",
-        "category": "back bend",
+        "category": "back-bend",
         "image": "updog.svg"
       }
     ]
@@ -50,7 +50,7 @@
     "id": 4,
     "english": "Upward facing dog",
     "sanskrit": "Urdhva Mukha Svanasana",
-    "category": "back bend",
+    "category": "back-bend",
     "image": "updog.svg",
     "counterpose": [
       {
@@ -61,5 +61,13 @@
         "image": "downdog.svg"
       }
     ]
+  },
+  {
+    "id": 5,
+    "english": "Mountain Pose",
+    "sanskrit": "Tadasana",
+    "category": "standing",
+    "image": "mountain.svg",
+    "counterpose": []
   }
 ]

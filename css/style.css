@@ -35,18 +35,24 @@ main {
   color: #7e7e7e;
 }
 
+/* categories */
+
+.pose {
+  display:none;
+}
+
 /* plan */
 #plan {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   padding: 5px;
 }
-#plan .pose {display:none}
+#plan .clone {display:none}
 
 #plan div,
 #poses div {
   padding: 5px;
-
+  
 }
 
 .pose,
@@ -82,6 +88,22 @@ main {
   color: rgb(181, 24, 24);
 }
 
+/* #standing-btn {
+  opacity:1;
+
+} */
+.filter-btn {
+  cursor:pointer;
+}
+.filter-on {
+  opacity:1;
+  text-decoration: none;
+
+}
+.filter-off {
+  opacity:.5;
+  text-decoration: line-through;
+}
 
 .counter-wrapper {
   display:none;
@@ -95,7 +117,12 @@ main {
 
 
 /* media queries breakpoints */
-@media (width <=600px) {}
+@media (width <=600px) {
+  #poses,
+  #plan {
+    grid-template-columns: 1fr 1fr;
+  }
+}
 
 @media (600px < width <=960px) {
   body {
@@ -104,7 +131,7 @@ main {
 
   #poses,
   #plan {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
   }
 
 }

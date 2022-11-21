@@ -17,10 +17,24 @@ async function loadPoses() {
 loadPoses().then(() => {
 
   for (let i = 0; i < poses.length; i++) {
+    //adding filter
     $("#filter").append(
-
-      `<span class="category">${poses[i].category} &nbsp;</span>`
+      `<span id="${poses[i].category}-btn" class="filter-btn filter-off">${poses[i].category} &nbsp;</span>`
     )
+    // interaction
+    // $('#standing-btn').trigger('click');
+
+    $(`#${poses[i].category}-btn`).click(function () {
+      $(`.${poses[i].category}`).fadeToggle()
+      if (!$(`#${poses[i].category}-btn`).hasClass('filter-on')) {
+        $(`#${poses[i].category}-btn`).removeClass('filter-off')
+        $(`#${poses[i].category}-btn`).addClass('filter-on')
+      } else {
+        $(`#${poses[i].category}-btn`).removeClass('filter-on')
+        $(`#${poses[i].category}-btn`).addClass('filter-off')
+      }
+    });
+
     $("#poses").append(
       `<div id="pose-${poses[i].id}" class="pose ${poses[i].category}">
         <div class="illustration"><img src="assets/poses/${poses[i].image}"/></div>
@@ -43,7 +57,7 @@ loadPoses().then(() => {
     // add buttons
     $(`#add-pose-${poses[i].id}`).click(function () {
       $("#plan").append(
-        `<div class="pose">
+        `<div class="clone pose">
         <div class="illustration"><img src="assets/poses/${poses[i].image}"/></div>
         <div class="english">${poses[i].english} </div>
         <div class="sanskrit">(${poses[i].sanskrit}) </div>
@@ -53,9 +67,9 @@ loadPoses().then(() => {
       $(".del-btn").click(function () {
         $(this).parent().fadeOut(function () {
           $(this).remove()
-        } )
+        })
       })
-      $('.pose').fadeIn()
+      $('.clone').fadeIn()
 
     })
 
@@ -92,6 +106,15 @@ loadPoses().then(() => {
     }
   }
 })
+
+
+
+
+
+
+
+
+
 
 // to sort, drag and drop in plan section
 $("#plan").sortable();
