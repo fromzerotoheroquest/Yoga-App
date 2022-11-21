@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,29 +8,48 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
-  <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
-  <script
-  src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"
-  integrity="sha256-xLD7nhI62fcsEZK2/v8LsBcb4lG7dgULkuXoXB/j91c="
-  crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js" integrity="sha512-0bEtK0USNd96MnO4XhH8jhv3nyRF0eK87pJke6pkYf3cM0uDIhNJy9ltuzqgypoIFXw3JSuiy04tVk4AjpZdZw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+    crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"
+    integrity="sha256-xLD7nhI62fcsEZK2/v8LsBcb4lG7dgULkuXoXB/j91c=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"
+    integrity="sha512-0bEtK0USNd96MnO4XhH8jhv3nyRF0eK87pJke6pkYf3cM0uDIhNJy9ltuzqgypoIFXw3JSuiy04tVk4AjpZdZw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="src/poses.json" defer></script>
 
   <script src="src/main.js" defer></script>
   <title>YogUp</title>
 </head>
+
 <body>
-  <header><div id="logo"><a href=""><img src="assets/logo.svg"/></a></div></header>
+  <header>
+    <div id="logo"><a href=""><img src="assets/logo.svg" /></a></div>
+  </header>
   <main>
 
-    <p>This app is made for anyone who would like to plan their yoga session. Particularly helpful to understand the counter poses</p>
+    <p>This app is made for anyone who would like to plan their yoga session. Particularly helpful to understand the
+      counter poses</p>
     <div id="filter">
-      <span>Category:</span> 
+      <div>Category:</div>
+      <button id="standing-btn" class="filter-btn filter-off ">standing</button>
+      <button id="reclining-btn" class="filter-btn filter-off">reclining</button>
+
+      <button id="inversion-btn" class="filter-btn filter-off">inversion</button>
+
+      <button id="backbend-btn" class="filter-btn filter-off">back-bend</button>
+
+      <button id="forwardbend-btn" class="filter-btn filter-off">forward-bend</button>
+      <button id="armbalance-btn" class="filter-btn filter-off">arm-balance</button>
+
     </div>
 
+    <button id="plan-btn">Plan</button>
+
     <div id="poses"></div>
-    <h3> Yoga plan:</h3>
     <div id="plan">
+      <h3> Yoga plan:</h3>
+      <div id="close-plan-btn">✖</div>
+      <div id="selected-poses"></div>
     </div>
   </main>
   <footer>
@@ -37,4 +57,5 @@
 
 
 </body>
+
 </html>

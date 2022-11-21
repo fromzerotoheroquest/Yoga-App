@@ -17,24 +17,6 @@ async function loadPoses() {
 loadPoses().then(() => {
 
   for (let i = 0; i < poses.length; i++) {
-    //adding filter
-    $("#filter").append(
-      `<span id="${poses[i].category}-btn" class="filter-btn filter-off">${poses[i].category} &nbsp;</span>`
-    )
-    // interaction
-    // $('#standing-btn').trigger('click');
-
-    $(`#${poses[i].category}-btn`).click(function () {
-      $(`.${poses[i].category}`).fadeToggle()
-      if (!$(`#${poses[i].category}-btn`).hasClass('filter-on')) {
-        $(`#${poses[i].category}-btn`).removeClass('filter-off')
-        $(`#${poses[i].category}-btn`).addClass('filter-on')
-      } else {
-        $(`#${poses[i].category}-btn`).removeClass('filter-on')
-        $(`#${poses[i].category}-btn`).addClass('filter-off')
-      }
-    });
-
     $("#poses").append(
       `<div id="pose-${poses[i].id}" class="pose ${poses[i].category}">
         <div class="illustration"><img src="assets/poses/${poses[i].image}"/></div>
@@ -56,7 +38,7 @@ loadPoses().then(() => {
     // interaction
     // add buttons
     $(`#add-pose-${poses[i].id}`).click(function () {
-      $("#plan").append(
+      $("#selected-poses").append(
         `<div class="clone pose">
         <div class="illustration"><img src="assets/poses/${poses[i].image}"/></div>
         <div class="english">${poses[i].english} </div>
@@ -91,7 +73,7 @@ loadPoses().then(() => {
         `<div id="pose-${poses[i].id}-counter-${poses[i].counterpose[j].id}" class="add-btn" > + add   </div>`
       )
       $(`#pose-${poses[i].id}-counter-${poses[i].counterpose[j].id}`).click(function () {
-        $("#plan").append(
+        $("#selected-poses").append(
           `<div class="counter-pose">
             <div class="illustration"><img src="assets/poses/${poses[i].counterpose[j].image}"/></div>
             <div class="english">${poses[i].counterpose[j].english} </div>
@@ -105,19 +87,39 @@ loadPoses().then(() => {
       })
     }
   }
+  //filter buttons
+  function filter (id, category) {
+    $(`#${id}`).click(function () {
+      $(`.${category}`).fadeToggle()
+      if (!$(`#${id}`).hasClass('filter-on')) {
+        $(`#${id}`).removeClass('filter-off')
+        $(`#${id}`).addClass('filter-on')
+      } else {
+        $(`#${id}`).removeClass('filter-on')
+        $(`#${id}`).addClass('filter-off')
+      }
+    });
+  }
+  
+  filter ('standing-btn', 'standing')
+  filter ('reclining-btn', 'reclining')
+  filter ('inversion-btn', 'inversion')
+  filter ('backbend-btn', 'back-bend')
+  filter ('forwardbend-btn', 'forward-bend')
+  filter ('armbalance-btn', 'arm-balance-bend')
+  $('#standing-btn').trigger('click');
 })
 
 
-
-
-
-
-
-
-
-
 // to sort, drag and drop in plan section
-$("#plan").sortable();
+$("#selected-poses").sortable();
+// close plan
+$("#close-plan-btn").click(() => {
+  $("#plan").fadeOut();
+})
+
+$("#plan-btn").click(() => {
+  $("#plan").fadeIn();
+})
 
 
-// console.log (poses)

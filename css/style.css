@@ -17,11 +17,13 @@ body {
 main {
   padding: 5px;
 }
+
 /* poses */
-#poses{
+#poses {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
 }
+
 .illustration img {
   width: 100px;
 }
@@ -38,33 +40,52 @@ main {
 /* categories */
 
 .pose {
-  display:none;
+  display: none;
 }
 
 /* plan */
 #plan {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  display: none;
   padding: 5px;
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 100;
+  background-color: #fff;
+  padding: 2%;
+  overflow-y: scroll;
+  height: 100vh;
+  width: 96vw;
 }
-#plan .clone {display:none}
+
+#plan .clone {
+  display: none;
+  cursor: grab;
+}
+
+#selected-poses {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+}
 
 #plan div,
 #poses div {
   padding: 5px;
-  
+
 }
 
 .pose,
 .counter-pose {
   margin: 3px;
-  background-color: #f3f3f3;
+  background-color: #f7f7f7;
   border-radius: 10px;
+  position: relative;
 }
 
 .pose .english,
 .counter-pose .english {
-  color: rgb(206, 89, 173);
+  color: #fe9a2e;
 }
 
 .illustration img {
@@ -81,33 +102,81 @@ main {
 }
 
 .add-btn {
-  color: rgb(33, 186, 200);
+  color: #1cc2c6;
+}
+
+.pose>.add-btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  padding: 5px;
+  font-size:20px;
+  border: 1px dashed #fe9a2e;
+  border-radius: 5px;
 }
 
 .del-btn {
   color: rgb(181, 24, 24);
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  padding: 5px;
+}
+
+#plan-btn {
+  cursor: pointer;
+  font-size:20px;
+  border: 1px dashed #fe9a2e;
+  border-radius: 5px;
+  padding: 10px;
+  color: #fe9a2e;
+
+}
+
+#close-plan-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 40px;
+  padding: 15px;
 }
 
 /* #standing-btn {
   opacity:1;
 
 } */
-.filter-btn {
-  cursor:pointer;
+
+#filter button {
+  margin: 0 5px 10px 0;
 }
+
+.filter-btn {
+  cursor: pointer;
+  padding: 10px;
+  font-size: 20px;
+  border: 1px dashed #1cc2c6;
+  border-radius: 5px;
+  min-width: 50px;
+}
+
 .filter-on {
-  opacity:1;
+  opacity: 1;
   text-decoration: none;
+  color: #fff;
+  background-color: #1cc2c6;
 
 }
+
 .filter-off {
-  opacity:.5;
-  text-decoration: line-through;
+  opacity: .5;
+  /* text-decoration: line-through; */
+  color:#1cc2c6;
 }
 
 .counter-wrapper {
-  display:none;
-  background-color: rgb(234, 234, 234);
+  display: none;
+  border: 1px dashed grey;
+  border-radius: 5px;
   padding: 5px;
 }
 
@@ -118,6 +187,7 @@ main {
 
 /* media queries breakpoints */
 @media (width <=600px) {
+
   #poses,
   #plan {
     grid-template-columns: 1fr 1fr;
