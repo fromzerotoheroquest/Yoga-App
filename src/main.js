@@ -30,7 +30,7 @@ loadPoses().then(() => {
     if (poses[i].counterpose.length > 0) {
       $(`#pose-${poses[i].id}`).append(
         `
-        <span id="pose-${poses[i].id}-counter-btn" class="counter-btn">Counter pose: <b>⇅</b></span>
+        <span id="pose-${poses[i].id}-counter-btn" class="counter-btn">Counter pose &nbsp;<img src="assets/balance_icon.svg"></span>
         <div class="counter-wrapper" ></div>
         `
       )
@@ -70,8 +70,9 @@ loadPoses().then(() => {
         `<div class="english">${poses[i].counterpose[j].english} </div>`
       );
       $(`#pose-${poses[i].id} .counter-wrapper`).append(
-        `<div id="pose-${poses[i].id}-counter-${poses[i].counterpose[j].id}" class="add-btn" > + add   </div>`
+        `<div id="pose-${poses[i].id}-counter-${poses[i].counterpose[j].id}" class="add-btn" > <img src="assets/add_icon.svg"></div>`
       )
+      //add pose to selected poses
       $(`#pose-${poses[i].id}-counter-${poses[i].counterpose[j].id}`).click(function () {
         $("#selected-poses").append(
           `<div class="counter-pose">
@@ -91,7 +92,7 @@ loadPoses().then(() => {
     }
   }
   //filter buttons
-  function filter (id, category) {
+  function filter(id, category) {
     $(`#${id}`).click(function () {
       $(`.${category}`).fadeToggle()
       if (!$(`#${id}`).hasClass('filter-on')) {
@@ -103,13 +104,13 @@ loadPoses().then(() => {
       }
     });
   }
-  
-  filter ('standing-btn', 'standing')
-  filter ('reclining-btn', 'reclining')
-  filter ('inversion-btn', 'inversion')
-  filter ('backbend-btn', 'back-bend')
-  filter ('forwardbend-btn', 'forward-bend')
-  filter ('armbalance-btn', 'arm-balance-bend')
+
+  filter('standing-btn', 'standing')
+  filter('reclining-btn', 'reclining')
+  filter('inversion-btn', 'inversion')
+  filter('backbend-btn', 'back-bend')
+  filter('forwardbend-btn', 'forward-bend')
+  filter('armbalance-btn', 'arm-balance-bend')
   $('#standing-btn').trigger('click');
 })
 
@@ -117,12 +118,16 @@ loadPoses().then(() => {
 // to sort, drag and drop in plan section
 $("#selected-poses").sortable();
 // close plan
-$("#close-plan-btn").click(() => {
-  $("#plan").fadeOut();
+$("#close-plan-btn, #blurry-bg").click(() => {
+  $("#plan, #blurry-bg").fadeOut();
 })
 
 $("#plan-btn").click(() => {
-  $("#plan").fadeIn();
+  $("#plan, #blurry-bg").fadeIn();
+  $('#blurry-bg').css({
+    'height': $(document).height() + 'px'
+  })
 })
+
 
 

@@ -27,32 +27,41 @@
 <body>
   <header>
     <div id="logo"><a href=""><img src="assets/logo.svg" /></a></div>
+    <h3>Plan your yoga journey</h3>
   </header>
   <main>
-    <h3>Plan your yoga journey</h3>
-    <p>This app is made for anyone who would like to plan their yoga session. Find yoga poses and counter poses.</p>
-    <button id="plan-btn">Plan<img src="assets/verified_icon.svg" alt=""></button>
-    <div id="filter">
-      <div>Choose category:</div>
-      <button id="standing-btn" class="filter-btn filter-off ">standing</button>
-      <button id="reclining-btn" class="filter-btn filter-off">reclining</button>
+    <div id="main-wrapper">
 
-      <button id="inversion-btn" class="filter-btn filter-off">inversion</button>
+      <div id="description">
+        <p>This app is made for anyone who would like to plan their yoga session. Find yoga poses and counter poses.</p>
+      </div>
+      <div class="nav">
 
-      <button id="backbend-btn" class="filter-btn filter-off">back-bend</button>
-
-      <button id="forwardbend-btn" class="filter-btn filter-off">forward-bend</button>
-      <button id="armbalance-btn" class="filter-btn filter-off">arm-balance</button>
-
+        <button id="plan-btn">Plan<img id="plan-icon" src="assets/verified_icon.svg" alt=""></button>
+        <div id="filter">
+          <div>Choose category:</div>
+          <button id="standing-btn" class="filter-btn filter-off ">standing</button>
+          <button id="reclining-btn" class="filter-btn filter-off">reclining</button>
+          
+          <button id="inversion-btn" class="filter-btn filter-off">inversion</button>
+          
+          <button id="backbend-btn" class="filter-btn filter-off">back-bend</button>
+          
+          <button id="forwardbend-btn" class="filter-btn filter-off">forward-bend</button>
+          <button id="armbalance-btn" class="filter-btn filter-off">arm-balance</button>
+          
+        </div>
+        
+        
+      </div>
+        <div id="poses"></div>
+      <div id="plan">
+        <h3> Yoga plan:</h3>
+        <div id="close-plan-btn">✖</div>
+        <div id="selected-poses"></div>
+      </div>
     </div>
-
-
-    <div id="poses"></div>
-    <div id="plan">
-      <h3> Yoga plan:</h3>
-      <div id="close-plan-btn">✖</div>
-      <div id="selected-poses"></div>
-    </div>
+    <div id="blurry-bg"></div>
   </main>
   <footer>
   </footer>

@@ -10,6 +10,12 @@ body {
   font-family: 'Montserrat', sans-serif;
 }
 
+header h3 {
+  text-align: center;
+  margin: 0;
+  color:#1cc2c6;
+}
+
 #logo {
   margin-top: 50px;
   display: flex;
@@ -24,6 +30,16 @@ main {
   padding: 10px;
 }
 
+#main-wrapper {
+  width: 100%;
+  margin: auto;
+}
+
+#description {
+  /* width: 60%; */
+  margin: auto;
+}
+
 /* poses */
 #poses {
   display: grid;
@@ -32,6 +48,7 @@ main {
 
 .illustration img {
   width: 100px;
+  background-color: #ebebeb;
 }
 
 .sanskrit {
@@ -109,6 +126,14 @@ main {
 
 .counter-btn {
   color: #fe9a2e;
+  display:flex;
+  align-items: center;
+  padding: 5px;
+}
+
+.counter-btn img {
+  height:30px;
+
 }
 
 .add-btn {
@@ -133,7 +158,7 @@ main {
   color: rgb(181, 24, 24);
   position: absolute;
   top: 5px;
-  right: 5px;
+  right: 15px;
   padding: 5px;
   font-size: 30px;
 }
@@ -152,6 +177,7 @@ main {
 #plan-btn img {
   padding:0 0 0 5px ;
 }
+
 #close-plan-btn {
   position: absolute;
   top: 0;
@@ -206,53 +232,94 @@ main {
   border: 1px dashed grey;
   border-radius: 5px;
   padding: 5px;
+  margin: 5px;
 }
 
-.counter-wrapper span {
+/* .counter-wrapper span {
   font-size: 12px;
+} */
+
+#blurry-bg {
+  display:none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  min-height: 100%;
+  z-index: 50;
+  opacity: .5;
+  background-color: rgb(228, 228, 228);
 }
 
+.blur {
+  filter:blur(5px);
+  animation: blur 1s none;
+  -webkit-animation: blur 1s none;
+
+}
+@keyframes blur {
+  0% { -webkit-filter: blur(0px); }
+  100% { -webkit-filter: blur(5px); }
+}
 
 /* media queries breakpoints */
 @media (width <=600px) {
 
   #poses,
-  #plan {
+  #selected-poses {
     grid-template-columns: 1fr 1fr;
   }
 }
 
 @media (600px < width <=960px) {
+  #main-wrapper {
+    width: 70%;
+  }
   body {
     background-color: rgb(250, 89, 89);
   }
 
   #poses,
+  #selected-poses {
+    grid-template-columns: 1fr 1fr;
+  }
   #plan {
-    grid-template-columns: 1fr 1fr 1fr;
+    width: 70%;
   }
 
 }
 
 @media (960px < width <=1264px) {
+  #main-wrapper {
+    width: 70%;
+  }
   body {
     background-color: rgb(136, 136, 253);
   }
 
   #poses,
+  #selected-poses {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
   #plan {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    width: 60%;
   }
 }
 
 @media (1264px < width <=1904px) {
+  #main-wrapper {
+    width: 50%;
+  }
   body {
     background-color: rgb(137, 255, 137);
   }
-
-  #poses,
   #plan {
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    width: 50%;
+  }
+  #poses,
+  #selected-poses {
+    grid-template-columns: 1fr 1fr 1fr;
   }
 }
 
@@ -260,9 +327,14 @@ main {
   body {
     background-color: rgb(255, 215, 141);
   }
-
-  #poses,
-  #plan {
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  #main-wrapper {
+    width: 50%;
   }
+  #selected-poses {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  #plan {
+    width: 50%;
+  }
+
 }
