@@ -43,7 +43,7 @@ loadPoses().then(() => {
         <div class="illustration"><img src="assets/poses/${poses[i].image}"/></div>
         <div class="english">${poses[i].english} </div>
         <div class="sanskrit">(${poses[i].sanskrit}) </div>
-        <div class="del-btn" /> ✖ del </div>
+        <div class="del-btn" /> ✖ </div>
         </div>`
       )
       $(".del-btn").click(function () {
@@ -78,7 +78,7 @@ loadPoses().then(() => {
             <div class="illustration"><img src="assets/poses/${poses[i].counterpose[j].image}"/></div>
             <div class="english">${poses[i].counterpose[j].english} </div>
             <div class="sanskrit">(${poses[i].counterpose[j].sanskrit}) </div>
-            <div class="del-btn" /> ✖ del </div>
+            <div class="del-btn" /> ✖ </div>
            </div>`
         )
         $(".del-btn").click(function () {
