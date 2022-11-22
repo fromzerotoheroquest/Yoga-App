@@ -23,7 +23,7 @@ loadPoses().then(() => {
         <div class="english">${poses[i].english} </div>
         <div class="sanskrit">(${poses[i].sanskrit}) </div>
         <div class="category">Category: ${poses[i].category} </div>
-        <div id="add-pose-${poses[i].id}" class="add-btn"> <b>+</b> add </div>
+        <div id="add-pose-${poses[i].id}" class="add-btn"> <img src="assets/add_icon.svg"></div>
        </div>`
     );
     // just to show it if there is any counter pose
@@ -82,7 +82,10 @@ loadPoses().then(() => {
            </div>`
         )
         $(".del-btn").click(function () {
-          $(this).parent().remove()
+          // $(this).parent().remove()
+          $(this).parent().fadeOut(function () {
+            $(this).remove()
+          })
         })
       })
     }

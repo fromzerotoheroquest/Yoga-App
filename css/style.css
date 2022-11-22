@@ -1,3 +1,8 @@
+/* main colours */
+ /* blue #1cc2c6; */
+ /* orange #fe9a2e; */
+
+
 html,
 body {
   margin: 0;
@@ -85,7 +90,7 @@ main {
 
 .pose .english,
 .counter-pose .english {
-  color: #fe9a2e;
+  color: #1cc2c6;
 }
 
 .illustration img {
@@ -101,8 +106,16 @@ main {
   cursor: pointer;
 }
 
+.counter-btn {
+  color: #fe9a2e;
+}
+
 .add-btn {
-  color: #1cc2c6;
+  color: #fe9a2e;
+}
+
+.add-btn img {
+  height:40px;
 }
 
 .pose>.add-btn {
@@ -111,8 +124,8 @@ main {
   right: 5px;
   padding: 5px;
   font-size:20px;
-  border: 1px dashed #fe9a2e;
-  border-radius: 5px;
+  /* border: 1px dashed #fe9a2e; */
+  /* border-radius: 5px; */
 }
 
 .del-btn {
@@ -125,14 +138,18 @@ main {
 
 #plan-btn {
   cursor: pointer;
-  font-size:20px;
-  border: 1px dashed #fe9a2e;
+  font-size: 20px;
+  border: 1px solid#fe9a2e;
   border-radius: 5px;
   padding: 10px;
-  color: #fe9a2e;
+  color: white;
+  width: 100%;
+  background: #fe9a2e;
 
 }
-
+#plan-btn img {
+  padding:0 0 0 5px ;
+}
 #close-plan-btn {
   position: absolute;
   top: 0;
@@ -145,6 +162,15 @@ main {
   opacity:1;
 
 } */
+
+#filter {
+  margin: 25px 0 10px 0;
+}
+ 
+#filter div {
+
+  padding-bottom: 5px;
+}
 
 #filter button {
   margin: 0 5px 10px 0;
@@ -168,7 +194,7 @@ main {
 }
 
 .filter-off {
-  opacity: .5;
+  opacity: .3;
   /* text-decoration: line-through; */
   color:#1cc2c6;
 }
