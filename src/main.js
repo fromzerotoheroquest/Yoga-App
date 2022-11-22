@@ -53,6 +53,10 @@ loadPoses().then(() => {
       })
       $('.clone').fadeIn()
 
+      // plan button animation to indicate user that a pose has been added to the plan
+      animatePlanButton ()
+
+
     })
 
     //counter poses buttons
@@ -74,6 +78,8 @@ loadPoses().then(() => {
       )
       //add pose to selected poses
       $(`#pose-${poses[i].id}-counter-${poses[i].counterpose[j].id}`).click(function () {
+      // plan button animation to indicate user that a pose has been added to the plan
+        animatePlanButton ()
         $("#selected-poses").append(
           `<div class="counter-pose">
             <div class="illustration"><img src="assets/poses/${poses[i].counterpose[j].image}"/></div>
@@ -113,6 +119,20 @@ loadPoses().then(() => {
   filter('armbalance-btn', 'arm-balance-bend')
   $('#standing-btn').trigger('click');
 })
+
+
+function animatePlanButton () {
+  $('#plan-btn').animate({
+    opacity: '.3'
+  }, 100).animate({
+    opacity: '.7'
+  }, 100).animate({
+    opacity: '.5'
+  }, 100).animate({
+    opacity: '1'
+  }, 100)
+}
+
 
 
 // to sort, drag and drop in plan section
