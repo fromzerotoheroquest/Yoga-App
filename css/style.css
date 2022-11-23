@@ -84,6 +84,7 @@ main {
   display: flex;
   align-items: center;
   color:#fe9a2e;
+  padding-left: 15px;
 }
 
 #plan .clone {
@@ -203,10 +204,12 @@ main {
   padding: 15px;
 }
 
-/* #standing-btn {
-  opacity:1;
 
-} */
+#plan-advice {
+  display: flex;
+  align-items: center;
+  padding-left: 15px;
+}
 
 #filter {
   margin: 25px 0 10px 0;

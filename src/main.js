@@ -54,7 +54,7 @@ loadPoses().then(() => {
       $('.clone').fadeIn()
 
       // plan button animation to indicate user that a pose has been added to the plan
-      animatePlanButton ()
+      animatePlanButton()
 
 
     })
@@ -78,8 +78,8 @@ loadPoses().then(() => {
       )
       //add pose to selected poses
       $(`#pose-${poses[i].id}-counter-${poses[i].counterpose[j].id}`).click(function () {
-      // plan button animation to indicate user that a pose has been added to the plan
-        animatePlanButton ()
+        // plan button animation to indicate user that a pose has been added to the plan
+        animatePlanButton()
         $("#selected-poses").append(
           `<div class="counter-pose">
             <div class="illustration"><img src="assets/poses/${poses[i].counterpose[j].image}"/></div>
@@ -120,8 +120,8 @@ loadPoses().then(() => {
   $('#standing-btn').trigger('click');
 })
 
-  // plan button animation to indicate user that a pose has been added to the plan
-function animatePlanButton () {
+// plan button animation to indicate user that a pose has been added to the plan
+function animatePlanButton() {
   $('#plan-btn').animate({
     opacity: '.3'
   }, 50).animate({
@@ -153,9 +153,9 @@ $("#print-btn").click(function () {
   frameDoc.document.write('</body></html>');
   frameDoc.document.close();
   setTimeout(function () {
-      window.frames["frame1"].focus();
-      window.frames["frame1"].print();
-      frame1.remove();
+    window.frames["frame1"].focus();
+    window.frames["frame1"].print();
+    frame1.remove();
   }, 500);
   $("#close-plan-btn, .del-btn , #print-btn").show();
 
@@ -170,6 +170,12 @@ $("#close-plan-btn, #blurry-bg").click(() => {
 })
 
 $("#plan-btn").click(() => {
+  $("#plan-advice").remove()
+  if ($('#selected-poses div').length === 0) {
+    $("#plan").append(
+      `<h4 id="plan-advice">Add poses to your plan by clicking on this icon<span class="add-btn" > <img src="assets/add_icon.svg"></span></h4>`
+    )
+  }
   $("#plan, #blurry-bg").fadeIn();
   $('#blurry-bg').css({
     'height': $(document).height() + 'px'
