@@ -23,14 +23,14 @@ loadPoses().then(() => {
         <div class="english">${poses[i].english} </div>
         <div class="sanskrit">(${poses[i].sanskrit}) </div>
         <div class="category">Category: ${poses[i].category} </div>
-        <div id="add-pose-${poses[i].id}" class="add-btn"> <img src="assets/add_icon.svg"></div>
+        <div id="add-pose-${poses[i].id}" class="btn add-btn"> <img src="assets/add_icon.svg"></div>
        </div>`
     );
     // just to show it if there is any counter pose
     if (poses[i].counterpose.length > 0) {
       $(`#pose-${poses[i].id}`).append(
         `
-        <span id="pose-${poses[i].id}-counter-btn" class="counter-btn">Counter pose &nbsp;<img src="assets/balance_icon.svg"></span>
+        <span id="pose-${poses[i].id}-counter-btn" class="btn counter-btn">Counter pose &nbsp;<img src="assets/balance_icon.svg"></span>
         <div class="counter-wrapper" ></div>
         `
       )
@@ -43,14 +43,17 @@ loadPoses().then(() => {
         <div class="illustration"><img src="assets/poses/${poses[i].image}"/></div>
         <div class="english">${poses[i].english} </div>
         <div class="sanskrit">(${poses[i].sanskrit}) </div>
-        <div class="del-btn" /> ✖ </div>
+        <div class="del-btn btn" /> ✖ </div>
         </div>`
       )
       $(".del-btn").click(function () {
-        $(this).parent().fadeOut(function () {
+        $(this).parent().fadeOut('fast',function () {
           $(this).remove()
+          showAdvice()
         })
       })
+
+
       $('.clone').fadeIn()
 
       // plan button animation to indicate user that a pose has been added to the plan
@@ -74,7 +77,7 @@ loadPoses().then(() => {
         `<div class="english">${poses[i].counterpose[j].english} </div>`
       );
       $(`#pose-${poses[i].id} .counter-wrapper`).append(
-        `<div id="pose-${poses[i].id}-counter-${poses[i].counterpose[j].id}" class="add-btn" > <img src="assets/add_icon.svg"></div>`
+        `<div id="pose-${poses[i].id}-counter-${poses[i].counterpose[j].id}" class="add-btn btn" > <img src="assets/add_icon.svg"></div>`
       )
       //add pose to selected poses
       $(`#pose-${poses[i].id}-counter-${poses[i].counterpose[j].id}`).click(function () {
@@ -85,13 +88,13 @@ loadPoses().then(() => {
             <div class="illustration"><img src="assets/poses/${poses[i].counterpose[j].image}"/></div>
             <div class="english">${poses[i].counterpose[j].english} </div>
             <div class="sanskrit">(${poses[i].counterpose[j].sanskrit}) </div>
-            <div class="del-btn" /> ✖ </div>
+            <div class="del-btn btn" /> ✖ </div>
            </div>`
         )
         $(".del-btn").click(function () {
-          // $(this).parent().remove()
-          $(this).parent().fadeOut(function () {
+          $(this).parent().fadeOut('fast',function () {
             $(this).remove()
+            showAdvice()
           })
         })
       })
@@ -100,6 +103,9 @@ loadPoses().then(() => {
   //filter buttons
   function filter(id, category) {
     $(`#${id}`).click(function () {
+      // $('#animation').css({
+      //   height: $(document).height() + 'px'
+      //   })
       $(`.${category}`).fadeToggle()
       if (!$(`#${id}`).hasClass('filter-on')) {
         $(`#${id}`).removeClass('filter-off')
@@ -169,18 +175,40 @@ $("#close-plan-btn, #blurry-bg").click(() => {
   $("#plan, #blurry-bg").fadeOut();
 })
 
-$("#plan-btn").click(() => {
-  $("#plan-advice").remove()
-  if ($('#selected-poses div').length === 0) {
+
+function showAdvice() {
+  $('#plan-advice').remove()
+  if ($('#selected-poses .clone').length === 0 && $('#selected-poses .counter-pose').length === 0) {
     $("#plan").append(
-      `<h4 id="plan-advice">Add poses to your plan by clicking on this icon<span class="add-btn" > <img src="assets/add_icon.svg"></span></h4>`
+      `<h4 id="plan-advice">Add poses to your plan by clicking on this icon<span class="add-btn" > <img src="assets/add_icon.svg"></span> </h4>`
     )
+    $('#plan-advice').hide().fadeIn(1000)
   }
+}
+
+// Plan button inteface
+$("#plan-btn").click(() => {
+  showAdvice();
   $("#plan, #blurry-bg").fadeIn();
   $('#blurry-bg').css({
-    'height': $(document).height() + 'px'
+    height: $(document).height() + 'px'
   })
 })
 
 
+//landing page animation
 
+function landingAnimation() {
+  $('#animation').css({
+    backgroundSize: '300%',
+    height: $(document).height() + 'px'
+  })
+  $('#animation').animate({
+    backgroundSize: '120%',
+  }, 1000).animate({
+    opacity: '.4',
+    zIndex: -5
+  }, 1000)
+}
+
+landingAnimation()
