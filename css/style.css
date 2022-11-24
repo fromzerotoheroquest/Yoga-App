@@ -180,12 +180,13 @@ main {
 }
 
 .del-btn {
-  color: rgb(181, 24, 24);
   position: absolute;
   top: 5px;
-  right: 15px;
-  padding: 5px;
-  font-size: 30px;
+  right: 5px;
+}
+
+.del-btn img {
+  height: 40px;
 }
 
 #plan-btn {
@@ -205,10 +206,12 @@ main {
 
 #close-plan-btn {
   position: absolute;
-  top: 0;
+  top: 15px;
   right: 15px;
-  font-size: 40px;
-  padding: 15px;
+}
+
+#close-plan-btn img {
+  height: 40px;
 }
 
 

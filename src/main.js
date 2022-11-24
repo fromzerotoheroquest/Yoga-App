@@ -40,11 +40,11 @@ loadPoses().then(() => {
     $(`#add-pose-${poses[i].id}`).click(function () {
       shakeButton(this)
       $("#selected-poses").append(
-        `<div class="clone pose">
+        `<div class="clone pose chosen">
         <div class="illustration"><img src="assets/poses/${poses[i].image}"/></div>
         <div class="english">${poses[i].english} </div>
         <div class="sanskrit">(${poses[i].sanskrit}) </div>
-        <div class="del-btn btn" /> ✖ </div>
+        <div class="del-btn btn"> <img src="assets/close_icon.svg"/> </div>
         </div>`
       )
       $(".del-btn").click(function () {
@@ -82,11 +82,11 @@ loadPoses().then(() => {
         shakeButton(this)
         animatePlanButton()
         $("#selected-poses").append(
-          `<div class="counter-pose">
+          `<div class="counter-pose chosen">
             <div class="illustration"><img src="assets/poses/${poses[i].counterpose[j].image}"/></div>
             <div class="english">${poses[i].counterpose[j].english} </div>
             <div class="sanskrit">(${poses[i].counterpose[j].sanskrit}) </div>
-            <div class="del-btn btn" /> ✖ </div>
+            <div class="del-btn btn"> <img src="assets/close_icon.svg"/> </div>
            </div>`
         )
         $(".del-btn").click(function () {
@@ -214,9 +214,10 @@ function landingAnimation(speed1, speed2) {
 
 //slideshow 
 $("#play-btn").click(function () {
-  let totalPoses = $("#selected-poses").children().length
-  console.log(totalPoses)
-  if ($("#gallery-nav").length === 0 && $("#selected-poses div").length !== 0) {
+  let poseCount = 0
+  let totalPoses = $(".chosen").length
+  console.log(`pose count is: ${totalPoses}`)
+  if ($("#gallery-nav").length === 0 && $("#selected-poses>div").length > 1) {
     //effects
     shakeButton(this)
     //switch button
@@ -236,28 +237,21 @@ $("#play-btn").click(function () {
     <div class=right-btn><img src="assets/right_icon.svg"></div>
     </div>
     `).insertAfter('.gallery')
-    let poseCount = 1
     $(".right-btn").click(function () {
-      poseCount++
-      
-      if (poseCount <= totalPoses) {
-        console.log(`pose count is: ${poseCount}`)
         $(".gallery").animate({
-          scrollTop: $(`#selected-poses div:nth-child(${poseCount})`).offset().top
+          // scrollTop: gallery_height
         }, 2000);
-        return poseCount
-      }
+        // $(".chosen").eq(poseCount).css( "background-color", "red" )
     })
     $(".left-btn").click(function () {
       poseCount--
-      if (poseCount >= 1) {
+      if (poseCount >= 0) {
         console.log(`pose count is: ${poseCount}`)
-      $(".gallery").animate({
-        scrollTop: $(`#selected-poses div:nth-child(${poseCount})`).offset().top
-      }, 2000);
-      return poseCount
-
-    }
+        console.log($( ".chosen" ).eq( poseCount  ).offset().top)
+        // $(".gallery").animate({
+        //   scrollTop: $( ".chosen" ).eq( poseCount  ).offset().top
+        // }, 2000);
+      }
 
     })
   }
@@ -275,12 +269,6 @@ $("#stop-btn").click(function () {
   $("#gallery-nav").remove()
   $(".gallery .del-btn").show()
   $("#selected-poses").removeClass('gallery')
-
-
 })
-
-
-
-
 
 landingAnimation(0, 0) //500, 1000 nice
