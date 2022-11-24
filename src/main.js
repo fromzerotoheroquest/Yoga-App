@@ -200,7 +200,7 @@ $("#plan-btn").click(() => {
 
 function landingAnimation() {
   $('#animation').css({
-    backgroundSize: '300%',
+    backgroundSize: '200%',
     height: $(document).height() + 'px'
   })
   $('#animation').animate({
