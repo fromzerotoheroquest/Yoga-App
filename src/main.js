@@ -133,33 +133,42 @@ function animatePlanButton() {
 }
 
 // print yoga plan 
-$("#print-btn").click(function () {
-  shakeButton(this)
-  $("#close-plan-btn, .del-btn, #print-btn, play-btn").hide();
-  var contents = $("#plan").html();
-  var frame1 = $('<iframe />');
-  frame1[0].name = "frame1";
-  frame1.css({ "position": "absolute", "top": "-1000000px" });
-  $("body").append(frame1);
-  var frameDoc = frame1[0].contentWindow ? frame1[0].contentWindow : frame1[0].contentDocument.document ? frame1[0].contentDocument.document : frame1[0].contentDocument;
-  frameDoc.document.open();
-  //Create a new HTML document.
-  frameDoc.document.write('<html><head><title>Yoga plan</title>');
-  frameDoc.document.write('</head><body>');
-  //Append the external CSS file.
-  frameDoc.document.write('<link href="css/style.css" rel="stylesheet" type="text/css" />');
-  //Append the DIV contents.
-  frameDoc.document.write(contents);
-  frameDoc.document.write('</body></html>');
-  frameDoc.document.close();
-  setTimeout(function () {
-    window.frames["frame1"].focus();
-    window.frames["frame1"].print();
-    frame1.remove();
-  }, 500);
-  $("#close-plan-btn, .del-btn , #print-btn").show();
 
-});
+function printPlan() {
+
+  if ($('.chosen').length !== 0) {
+    $("#print-btn").show()
+    $("#print-btn").click(function () {
+
+      shakeButton(this)
+      $("#close-plan-btn, .del-btn, #print-btn, play-btn").hide();
+      var contents = $("#plan").html();
+      var frame1 = $('<iframe />');
+      frame1[0].name = "frame1";
+      frame1.css({ "position": "absolute", "top": "-1000000px" });
+      $("body").append(frame1);
+      var frameDoc = frame1[0].contentWindow ? frame1[0].contentWindow : frame1[0].contentDocument.document ? frame1[0].contentDocument.document : frame1[0].contentDocument;
+      frameDoc.document.open();
+      //Create a new HTML document.
+      frameDoc.document.write('<html><head><title>Yoga plan</title>');
+      frameDoc.document.write('</head><body>');
+      //Append the external CSS file.
+      frameDoc.document.write('<link href="css/style.css" rel="stylesheet" type="text/css" />');
+      //Append the DIV contents.
+      frameDoc.document.write(contents);
+      frameDoc.document.write('</body></html>');
+      frameDoc.document.close();
+      setTimeout(function () {
+        window.frames["frame1"].focus();
+        window.frames["frame1"].print();
+        frame1.remove();
+      }, 500);
+      $("#close-plan-btn, .del-btn , #print-btn").show();
+
+    });
+  } else { $("#print-btn").hide() }
+}
+
 
 
 // to sort, drag and drop in plan section
@@ -188,6 +197,7 @@ function shakeButton(element) {
 // Plan button inteface
 $("#plan-btn").click(() => {
   showAdvice();
+  printPlan()
   $("#plan, #blurry-bg").fadeIn();
   $('#blurry-bg').css({
     height: $(document).height() + 'px'
@@ -238,16 +248,16 @@ $("#play-btn").click(function () {
     </div>
     `).insertAfter('.gallery')
     $(".right-btn").click(function () {
-        $(".gallery").animate({
-          // scrollTop: gallery_height
-        }, 2000);
-        // $(".chosen").eq(poseCount).css( "background-color", "red" )
+      $(".gallery").animate({
+        // scrollTop: gallery_height
+      }, 2000);
+      // $(".chosen").eq(poseCount).css( "background-color", "red" )
     })
     $(".left-btn").click(function () {
       poseCount--
       if (poseCount >= 0) {
         console.log(`pose count is: ${poseCount}`)
-        console.log($( ".chosen" ).eq( poseCount  ).offset().top)
+        console.log($(".chosen").eq(poseCount).offset().top)
         // $(".gallery").animate({
         //   scrollTop: $( ".chosen" ).eq( poseCount  ).offset().top
         // }, 2000);
@@ -271,4 +281,4 @@ $("#stop-btn").click(function () {
   $("#selected-poses").removeClass('gallery')
 })
 
-landingAnimation(0, 0) //500, 1000 nice
+landingAnimation(500, 1000) //500, 1000 nice
