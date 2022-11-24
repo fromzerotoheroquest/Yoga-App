@@ -52,14 +52,10 @@ loadPoses().then(() => {
           showAdvice()
         })
       })
-
-
       $('.clone').fadeIn()
 
       // plan button animation to indicate user that a pose has been added to the plan
       animatePlanButton()
-
-
     })
 
     //counter poses buttons
@@ -106,7 +102,7 @@ loadPoses().then(() => {
       // $('#animation').css({
       //   height: $(document).height() + 'px'
       //   })
-      $(`.${category}`).fadeToggle()
+      $(`.${category}`).toggle('pulsate', 'slow')
       if (!$(`#${id}`).hasClass('filter-on')) {
         $(`#${id}`).removeClass('filter-off')
         $(`#${id}`).addClass('filter-on')
@@ -130,13 +126,9 @@ loadPoses().then(() => {
 function animatePlanButton() {
   $('#plan-btn').animate({
     opacity: '.3'
-  }, 50).animate({
-    opacity: '.7'
-  }, 50).animate({
-    opacity: '.5'
-  }, 50).animate({
+  }, 50).effect( "bounce", "fast" ).animate({
     opacity: '1'
-  }, 50)
+  }, 50).effect( "highlight", "fast" )
 }
 
 // print yoga plan 
@@ -204,11 +196,13 @@ function landingAnimation() {
     height: $(document).height() + 'px'
   })
   $('#animation').animate({
-    backgroundSize: '120%',
-  }, 1000).animate({
+    backgroundSize: '170%',
+  }, 500, 'easeInBounce').animate({
+    backgroundSize: '120%'
+  }, 1000,'easeInOutQuint').animate({
     opacity: '.4',
     zIndex: -5
-  }, 1000)
+  })
 }
 
 landingAnimation()
