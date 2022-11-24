@@ -38,6 +38,7 @@ loadPoses().then(() => {
     // interaction
     // add buttons
     $(`#add-pose-${poses[i].id}`).click(function () {
+      shakeButton (this) 
       $("#selected-poses").append(
         `<div class="clone pose">
         <div class="illustration"><img src="assets/poses/${poses[i].image}"/></div>
@@ -78,6 +79,7 @@ loadPoses().then(() => {
       //add pose to selected poses
       $(`#pose-${poses[i].id}-counter-${poses[i].counterpose[j].id}`).click(function () {
         // plan button animation to indicate user that a pose has been added to the plan
+        shakeButton (this) 
         animatePlanButton()
         $("#selected-poses").append(
           `<div class="counter-pose">
@@ -99,10 +101,9 @@ loadPoses().then(() => {
   //filter buttons
   function filter(id, category) {
     $(`#${id}`).click(function () {
-      // $('#animation').css({
-      //   height: $(document).height() + 'px'
-      //   })
-      $(`.${category}`).toggle('pulsate', 'slow')
+
+      //effect pulsate to help user realise what new elements have been included
+      $(`.${category}`).toggle('pulsate', { times: 1}, 250 )
       if (!$(`#${id}`).hasClass('filter-on')) {
         $(`#${id}`).removeClass('filter-off')
         $(`#${id}`).addClass('filter-on')
@@ -167,7 +168,7 @@ $("#close-plan-btn, #blurry-bg").click(() => {
   $("#plan, #blurry-bg").fadeOut();
 })
 
-
+// encourage to add poses in plan section if it is empty
 function showAdvice() {
   $('#plan-advice').remove()
   if ($('#selected-poses .clone').length === 0 && $('#selected-poses .counter-pose').length === 0) {
@@ -177,6 +178,11 @@ function showAdvice() {
     $('#plan-advice').hide().fadeIn(1000)
   }
 }
+
+// highlight add button to let users know they clicked on it
+function shakeButton (element) {
+  $(element).effect('shake', { direction: "right", times: 1.5, distance: 5}, 500 )
+} 
 
 // Plan button inteface
 $("#plan-btn").click(() => {
