@@ -38,7 +38,7 @@ loadPoses().then(() => {
     // interaction
     // add buttons
     $(`#add-pose-${poses[i].id}`).click(function () {
-      shakeButton (this) 
+      shakeButton(this)
       $("#selected-poses").append(
         `<div class="clone pose">
         <div class="illustration"><img src="assets/poses/${poses[i].image}"/></div>
@@ -48,7 +48,7 @@ loadPoses().then(() => {
         </div>`
       )
       $(".del-btn").click(function () {
-        $(this).parent().fadeOut('fast',function () {
+        $(this).parent().fadeOut('fast', function () {
           $(this).remove()
           showAdvice()
         })
@@ -79,7 +79,7 @@ loadPoses().then(() => {
       //add pose to selected poses
       $(`#pose-${poses[i].id}-counter-${poses[i].counterpose[j].id}`).click(function () {
         // plan button animation to indicate user that a pose has been added to the plan
-        shakeButton (this) 
+        shakeButton(this)
         animatePlanButton()
         $("#selected-poses").append(
           `<div class="counter-pose">
@@ -90,7 +90,7 @@ loadPoses().then(() => {
            </div>`
         )
         $(".del-btn").click(function () {
-          $(this).parent().fadeOut('fast',function () {
+          $(this).parent().fadeOut('fast', function () {
             $(this).remove()
             showAdvice()
           })
@@ -103,7 +103,7 @@ loadPoses().then(() => {
     $(`#${id}`).click(function () {
 
       //effect pulsate to help user realise what new elements have been included
-      $(`.${category}`).toggle('pulsate', { times: 1}, 250 )
+      $(`.${category}`).toggle('pulsate', { times: 1 }, 250)
       if (!$(`#${id}`).hasClass('filter-on')) {
         $(`#${id}`).removeClass('filter-off')
         $(`#${id}`).addClass('filter-on')
@@ -127,14 +127,15 @@ loadPoses().then(() => {
 function animatePlanButton() {
   $('#plan-btn').animate({
     opacity: '.3'
-  }, 50).effect( "bounce", "fast" ).animate({
+  }, 50).effect("bounce", "fast").animate({
     opacity: '1'
-  }, 50).effect( "highlight", "fast" )
+  }, 50).effect("highlight", "fast")
 }
 
 // print yoga plan 
 $("#print-btn").click(function () {
-  $("#close-plan-btn, .del-btn, #print-btn").hide();
+  shakeButton(this)
+  $("#close-plan-btn, .del-btn, #print-btn, play-btn").hide();
   var contents = $("#plan").html();
   var frame1 = $('<iframe />');
   frame1[0].name = "frame1";
@@ -180,9 +181,9 @@ function showAdvice() {
 }
 
 // highlight add button to let users know they clicked on it
-function shakeButton (element) {
-  $(element).effect('shake', { direction: "right", times: 1.5, distance: 5}, 500 )
-} 
+function shakeButton(element) {
+  $(element).effect('shake', { direction: "right", times: 1.5, distance: 5 }, 500)
+}
 
 // Plan button inteface
 $("#plan-btn").click(() => {
@@ -196,19 +197,90 @@ $("#plan-btn").click(() => {
 
 //landing page animation
 
-function landingAnimation() {
+function landingAnimation(speed1, speed2) {
   $('#animation').css({
     backgroundSize: '200%',
     height: $(document).height() + 'px'
   })
   $('#animation').animate({
     backgroundSize: '170%',
-  }, 500, 'easeInBounce').animate({
+  }, speed1, 'easeInBounce').animate({
     backgroundSize: '120%'
-  }, 1000,'easeInOutQuint').animate({
+  }, speed2, 'easeInOutQuint').animate({
     opacity: '.4',
     zIndex: -5
   })
 }
 
-landingAnimation()
+//slideshow 
+$("#play-btn").click(function () {
+  let totalPoses = $("#selected-poses").children().length
+  console.log(totalPoses)
+  if ($("#gallery-nav").length === 0 && $("#selected-poses div").length !== 0) {
+    //effects
+    shakeButton(this)
+    //switch button
+    $("#play-btn").fadeOut(function () {
+      $("#stop-btn").fadeIn()
+    })
+    $("#selected-poses").addClass('gallery')
+    let gallery_height = $("#selected-poses>div").outerHeight()
+    console.log(gallery_height)
+    $(".gallery").height(gallery_height)
+    $(".gallery .del-btn").hide()
+
+    //create navigation buttons
+    $(`
+    <div id="gallery-nav">
+    <div class=left-btn><img src="assets/left_icon.svg"></div>
+    <div class=right-btn><img src="assets/right_icon.svg"></div>
+    </div>
+    `).insertAfter('.gallery')
+    let poseCount = 1
+    $(".right-btn").click(function () {
+      poseCount++
+      
+      if (poseCount <= totalPoses) {
+        console.log(`pose count is: ${poseCount}`)
+        $(".gallery").animate({
+          scrollTop: $(`#selected-poses div:nth-child(${poseCount})`).offset().top
+        }, 2000);
+        return poseCount
+      }
+    })
+    $(".left-btn").click(function () {
+      poseCount--
+      if (poseCount >= 1) {
+        console.log(`pose count is: ${poseCount}`)
+      $(".gallery").animate({
+        scrollTop: $(`#selected-poses div:nth-child(${poseCount})`).offset().top
+      }, 2000);
+      return poseCount
+
+    }
+
+    })
+  }
+})
+
+$("#stop-btn").click(function () {
+  //effects
+  shakeButton(this)
+  //switch button
+  $("#stop-btn").fadeOut(function () {
+    $("#play-btn").fadeIn()
+  })
+  $(".gallery").height('auto')
+
+  $("#gallery-nav").remove()
+  $(".gallery .del-btn").show()
+  $("#selected-poses").removeClass('gallery')
+
+
+})
+
+
+
+
+
+landingAnimation(0, 0) //500, 1000 nice

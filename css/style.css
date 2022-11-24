@@ -62,8 +62,10 @@ main {
 }
 
 .illustration img {
-  width: 100px;
+  width: 100%;
   background-color: #ebebeb;
+  min-width: 150px;
+  /* max-height: 150px; */
 }
 
 .sanskrit {
@@ -133,12 +135,6 @@ main {
   color: #3a5d83;
 }
 
-.illustration img {
-  width: 100%;
-  min-width: 150px;
-  max-height: 150px;
-}
-
 /* buttons */
 .btn {
   cursor: pointer;
@@ -151,15 +147,15 @@ main {
   padding: 5px;
 }
 
-#print-btn {
-  color: #bd70ef;
-  display: flex;
-  align-items: center;
-  padding: 5px;
+#print-btn, #play-btn, #stop-btn {
 }
 
-#print-btn img {
-  height: 40px;
+#print-btn img, #play-btn img , #stop-btn img{
+  height: 35px;
+}
+
+#stop-btn { 
+  display: none;
 }
 
 .counter-btn img {
@@ -221,6 +217,20 @@ main {
   align-items: center;
   padding: 0 15px;
 }
+
+.gallery {
+  display: block !important;
+  overflow-y: scroll;
+}
+
+#gallery-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+}
+
+
 
 #filter {
   margin: 25px 0 10px 0;
