@@ -100,7 +100,6 @@ main {
   display: flex;
   align-items: center;
   color: #bd70ef;
-  padding-left: 15px;
 }
 #plan-advice {
   display: flex;
@@ -118,10 +117,12 @@ main {
 
 }
 
-#plan div,
 #poses div {
   padding: 5px;
+}
 
+.formatting div {
+  padding: 5px;
 }
 
 .pose,
@@ -205,10 +206,12 @@ main {
 }
 
 .topose-btn {
+  display: inline-block;
   height: 30px;
   width: 30px;
   background-color: #3a5d83;
   border-radius: 30px;
+  margin:5px;
 }
 
 .button-on {
@@ -218,23 +221,27 @@ main {
 /* Slideshow */
 .gallery {
   display: block !important;
-  overflow-y: scroll;
-  /* height: 500px !important; */
-  /* position:absolute; */
+  overflow-y: hidden;
   width: 100%;
   top:200px;
 }
 
-.chosen {
-  /* max-height: 500px; */
+.gallery .chosen {
+/* padding: 0px !important;
+border-radius: 0 !important; */
+margin: 0 !important;
+padding:10px;
 }
-
 
 #gallery-nav {
-  display: flex;
+  /* display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 15px;
+  width: 100%; */
 }
+
+
 /* category filter  */
 #filter {
   margin: 25px 0 10px 0;
