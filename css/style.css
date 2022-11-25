@@ -51,7 +51,6 @@ main {
 }
 
 #description {
-  /* width: 60%; */
   margin: auto;
 }
 
@@ -65,7 +64,6 @@ main {
   width: 100%;
   background-color: #ebebeb;
   min-width: 150px;
-  /* max-height: 150px; */
 }
 
 .sanskrit {
@@ -104,7 +102,11 @@ main {
   color: #bd70ef;
   padding-left: 15px;
 }
-
+#plan-advice {
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
+}
 #plan .clone {
   display: none;
   cursor: grab;
@@ -136,6 +138,10 @@ main {
 }
 
 /* buttons */
+.icon {
+  height: 40px;
+}
+
 .btn {
   cursor: pointer;
 }
@@ -147,28 +153,13 @@ main {
   padding: 5px;
 }
 
-#print-btn, #play-btn, #stop-btn {
-}
-
-#print-btn img, #play-btn img , #stop-btn img{
-  height: 35px;
-}
 
 #stop-btn { 
   display: none;
 }
 
-.counter-btn img {
-  height: 30px;
-
-}
-
 .add-btn {
   color: #bd70ef;
-}
-
-.add-btn img {
-  height: 40px;
 }
 
 .pose>.add-btn {
@@ -183,10 +174,6 @@ main {
   position: absolute;
   top: 5px;
   right: 5px;
-}
-
-.del-btn img {
-  height: 40px;
 }
 
 #plan-btn {
@@ -209,32 +196,46 @@ main {
   top: 15px;
   right: 15px;
 }
-
-#close-plan-btn img {
-  height: 40px;
+.counter-wrapper {
+  display: none;
+  border: 1px dashed grey;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 5px;
 }
 
-
-#plan-advice {
-  display: flex;
-  align-items: center;
-  padding: 0 15px;
+.topose-btn {
+  height: 30px;
+  width: 30px;
+  background-color: #3a5d83;
+  border-radius: 30px;
 }
 
+.button-on {
+  background-color: #bd70ef;
+}
+
+/* Slideshow */
 .gallery {
   display: block !important;
   overflow-y: scroll;
+  /* height: 500px !important; */
+  /* position:absolute; */
+  width: 100%;
+  top:200px;
 }
+
+.chosen {
+  /* max-height: 500px; */
+}
+
 
 #gallery-nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-
 }
-
-
-
+/* category filter  */
 #filter {
   margin: 25px 0 10px 0;
 }
@@ -270,13 +271,7 @@ main {
   color: #3a5d83;
 }
 
-.counter-wrapper {
-  display: none;
-  border: 1px dashed grey;
-  border-radius: 5px;
-  padding: 5px;
-  margin: 5px;
-}
+
 
 #blurry-bg {
   display: none;

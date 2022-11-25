@@ -23,14 +23,14 @@ loadPoses().then(() => {
         <div class="english">${poses[i].english} </div>
         <div class="sanskrit">(${poses[i].sanskrit}) </div>
         <div class="category">Category: ${poses[i].category} </div>
-        <div id="add-pose-${poses[i].id}" class="btn add-btn"> <img src="assets/add_icon.svg"></div>
+        <div id="add-pose-${poses[i].id}" class="btn add-btn"> <img class="icon" src="assets/add_icon.svg"></div>
        </div>`
     );
     // just to show it if there is any counter pose
     if (poses[i].counterpose.length > 0) {
       $(`#pose-${poses[i].id}`).append(
         `
-        <span id="pose-${poses[i].id}-counter-btn" class="btn counter-btn">Counter pose &nbsp;<img src="assets/balance_icon.svg"></span>
+        <span id="pose-${poses[i].id}-counter-btn" class="btn counter-btn">Counter pose &nbsp;<img  class="icon" src="assets/balance_icon.svg"></span>
         <div class="counter-wrapper" ></div>
         `
       )
@@ -74,7 +74,7 @@ loadPoses().then(() => {
         `<div class="english">${poses[i].counterpose[j].english} </div>`
       );
       $(`#pose-${poses[i].id} .counter-wrapper`).append(
-        `<div id="pose-${poses[i].id}-counter-${poses[i].counterpose[j].id}" class="add-btn btn" > <img src="assets/add_icon.svg"></div>`
+        `<div id="pose-${poses[i].id}-counter-${poses[i].counterpose[j].id}" class="add-btn btn" > <img  class="icon" src="assets/add_icon.svg"></div>`
       )
       //add pose to selected poses
       $(`#pose-${poses[i].id}-counter-${poses[i].counterpose[j].id}`).click(function () {
@@ -86,7 +86,7 @@ loadPoses().then(() => {
             <div class="illustration"><img src="assets/poses/${poses[i].counterpose[j].image}"/></div>
             <div class="english">${poses[i].counterpose[j].english} </div>
             <div class="sanskrit">(${poses[i].counterpose[j].sanskrit}) </div>
-            <div class="del-btn btn"> <img src="assets/close_icon.svg"/> </div>
+            <div class="del-btn btn"> <img  class="icon" src="assets/close_icon.svg"/> </div>
            </div>`
         )
         $(".del-btn").click(function () {
@@ -176,6 +176,8 @@ $("#selected-poses").sortable();
 // close plan
 $("#close-plan-btn, #blurry-bg").click(() => {
   $("#plan, #blurry-bg").fadeOut();
+  $("#stop-btn").trigger('click');
+
 })
 
 // encourage to add poses in plan section if it is empty
@@ -183,7 +185,7 @@ function showAdvice() {
   $('#plan-advice').remove()
   if ($('#selected-poses .clone').length === 0 && $('#selected-poses .counter-pose').length === 0) {
     $("#plan").append(
-      `<h4 id="plan-advice">Add poses to your plan by clicking on this icon<span class="add-btn" > <img src="assets/add_icon.svg"></span> </h4>`
+      `<h4 id="plan-advice">Add poses to your plan by clicking on this icon<span class="add-btn" > <img  class="icon" src="assets/add_icon.svg"></span> </h4>`
     )
     $('#plan-advice').hide().fadeIn(1000)
   }
@@ -191,11 +193,18 @@ function showAdvice() {
 
 // highlight add button to let users know they clicked on it
 function shakeButton(element) {
-  $(element).effect('shake', { direction: "right", times: 1.5, distance: 5 }, 500)
+  $(element).effect('shake', { direction: "right", times: 1.5, distance: 5 }, 300)
 }
 
 // Plan button inteface
 $("#plan-btn").click(() => {
+  //hide icons if not selection has been made
+  if ($('.chosen').length === 0) {
+    $('#play-btn, #print-btn').hide()
+  }
+  if ($('.chosen').length === 1) {
+    $('#play-btn').hide()
+  }
   showAdvice();
   printPlan()
   $("#plan, #blurry-bg").fadeIn();
@@ -205,8 +214,92 @@ $("#plan-btn").click(() => {
 })
 
 
-//landing page animation
 
+//slideshow 
+$("#play-btn").click(function () {
+
+  if ($("#gallery-nav").length === 0 && $("#selected-poses>div").length > 1) {
+
+    //hide print button
+    $('#print-btn').fadeOut('fast')
+
+    //effects
+    shakeButton(this)
+    //switch button
+    $("#play-btn").fadeOut('fast', function () {
+      $("#stop-btn").fadeIn('fast')
+    })
+    //add class to re-shape the poses
+    $("#selected-poses").addClass('gallery')
+    $(".gallery").css({'height': $(".gallery .chosen").outerHeight()})
+    $(".gallery .del-btn").hide()
+
+    //create navigation buttons
+    $('<div id="gallery-nav"></div>').insertBefore('.gallery')
+    // $('#gallery-nav').append(
+    // `
+    // <div class=left-btn><img  class="icon" src="assets/left_icon.svg"></div>
+    // <div class=right-btn><img  class="icon" src="assets/right_icon.svg"></div>
+    // `)
+
+    //navigation buttons
+    for (let i = 0; i < $('.chosen').length; i++) {
+      $('#gallery-nav').append(`<div class="topose-btn btn"></div>`)
+    }
+    var toPoseButtons = document.querySelectorAll('.topose-btn');
+    for (let i = 0; i < $('.topose-btn').length; i++) {
+      toPoseButtons[i].addEventListener('click', controls, false);
+    }
+
+    //
+    $('.topose-btn').first().addClass('button-on')
+    //to control buttons behaviour
+    function controls() {
+      console.log($('.chosen').outerHeight())
+      $(this).addClass('button-on').siblings('div').removeClass('button-on');
+      $(".gallery").animate({
+        scrollTop: $(this).index() * ($('.chosen').outerHeight())
+        // scrollTop: $('.chosen').index($(this).index())
+
+      }, 2000);
+    }
+
+
+    // $(".right-btn").click(function () {
+    //   $(".gallery").animate({
+    //     scrollTop: 500
+    //   }, 2000);
+    //   // $(".chosen").eq(poseCount).css( "background-color", "red" )
+    // })
+    // $(".left-btn").click(function () {
+    //   poseCount--
+    //   if (poseCount >= 0) {
+    //     console.log(`pose count is: ${poseCount}`)
+    //     console.log($(".chosen").eq(poseCount).offset().top)
+    //     $(".gallery").animate({
+    //       scrollTop: -500
+    //     }, 2000);
+    //   }
+
+    // })
+  }
+})
+
+$("#stop-btn").click(function () {
+  //effects
+  shakeButton(this)
+  //switch button
+  $("#stop-btn").fadeOut('fast', function () {
+    $("#play-btn").fadeIn('fast')
+  })
+  $(".gallery").height('auto')
+
+  $("#gallery-nav").remove()
+  $(".gallery .del-btn").show()
+  $("#selected-poses").removeClass('gallery')
+})
+
+//landing page animation
 function landingAnimation(speed1, speed2) {
   $('#animation').css({
     backgroundSize: '200%',
@@ -221,64 +314,4 @@ function landingAnimation(speed1, speed2) {
     zIndex: -5
   })
 }
-
-//slideshow 
-$("#play-btn").click(function () {
-  let poseCount = 0
-  let totalPoses = $(".chosen").length
-  console.log(`pose count is: ${totalPoses}`)
-  if ($("#gallery-nav").length === 0 && $("#selected-poses>div").length > 1) {
-    //effects
-    shakeButton(this)
-    //switch button
-    $("#play-btn").fadeOut(function () {
-      $("#stop-btn").fadeIn()
-    })
-    $("#selected-poses").addClass('gallery')
-    let gallery_height = $("#selected-poses>div").outerHeight()
-    console.log(gallery_height)
-    $(".gallery").height(gallery_height)
-    $(".gallery .del-btn").hide()
-
-    //create navigation buttons
-    $(`
-    <div id="gallery-nav">
-    <div class=left-btn><img src="assets/left_icon.svg"></div>
-    <div class=right-btn><img src="assets/right_icon.svg"></div>
-    </div>
-    `).insertAfter('.gallery')
-    $(".right-btn").click(function () {
-      $(".gallery").animate({
-        // scrollTop: gallery_height
-      }, 2000);
-      // $(".chosen").eq(poseCount).css( "background-color", "red" )
-    })
-    $(".left-btn").click(function () {
-      poseCount--
-      if (poseCount >= 0) {
-        console.log(`pose count is: ${poseCount}`)
-        console.log($(".chosen").eq(poseCount).offset().top)
-        // $(".gallery").animate({
-        //   scrollTop: $( ".chosen" ).eq( poseCount  ).offset().top
-        // }, 2000);
-      }
-
-    })
-  }
-})
-
-$("#stop-btn").click(function () {
-  //effects
-  shakeButton(this)
-  //switch button
-  $("#stop-btn").fadeOut(function () {
-    $("#play-btn").fadeIn()
-  })
-  $(".gallery").height('auto')
-
-  $("#gallery-nav").remove()
-  $(".gallery .del-btn").show()
-  $("#selected-poses").removeClass('gallery')
-})
-
-landingAnimation(500, 1000) //500, 1000 nice
+landingAnimation(0, 0) //500, 1000 nice
