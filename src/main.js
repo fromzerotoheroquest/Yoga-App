@@ -292,4 +292,4 @@ function landingAnimation(speed1, speed2) {
     zIndex: -5
   })
 }
-landingAnimation(0, 0) //500, 1000 nice
+landingAnimation(500, 1000) //500, 1000 nice
