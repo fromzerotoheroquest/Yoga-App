@@ -16,11 +16,11 @@ body {
   left: 0;
   width: 100vw;
   height: 100vh;
- /*  background image with white overlay */
-  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0),rgba(255, 255, 255, 0), rgb(255, 255, 255)), url('../assets/landing.jpg');
+  /*  background image with white overlay */
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0), rgb(255, 255, 255)), url('../assets/landing.jpg');
   background-position: top center;
   background-repeat: no-repeat;
-  background-size:cover;
+  background-size: cover;
 
   z-index: 1000;
 }
@@ -63,7 +63,7 @@ main {
 .illustration img {
   width: 100%;
   background-color: #ebebeb;
-  min-width: 150px;
+  min-width: 100px;
 }
 
 .sanskrit {
@@ -101,11 +101,13 @@ main {
   align-items: center;
   color: #bd70ef;
 }
+
 #plan-advice {
   display: flex;
   align-items: center;
   padding: 0 15px;
 }
+
 #plan .clone {
   display: none;
   cursor: grab;
@@ -114,7 +116,6 @@ main {
 #selected-poses {
   display: grid;
   grid-template-columns: 1fr 1fr;
-
 }
 
 #poses div {
@@ -155,7 +156,7 @@ main {
 }
 
 
-#stop-btn { 
+#stop-btn {
   display: none;
 }
 
@@ -197,6 +198,7 @@ main {
   top: 15px;
   right: 15px;
 }
+
 .counter-wrapper {
   display: none;
   border: 1px dashed grey;
@@ -211,7 +213,7 @@ main {
   width: 30px;
   background-color: #3a5d83;
   border-radius: 30px;
-  margin:5px;
+  margin: 5px;
 }
 
 .button-on {
@@ -223,24 +225,14 @@ main {
   display: block !important;
   overflow-y: hidden;
   width: 100%;
-  top:200px;
+  top: 200px;
+  margin:0 !important;
 }
 
 .gallery .chosen {
-/* padding: 0px !important;
-border-radius: 0 !important; */
-margin: 0 !important;
-padding:10px;
+  margin: 0 !important;
+  padding: 10px;
 }
-
-#gallery-nav {
-  /* display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 15px;
-  width: 100%; */
-}
-
 
 /* category filter  */
 #filter {
@@ -316,6 +308,10 @@ padding:10px;
   #selected-poses {
     grid-template-columns: 1fr 1fr;
   }
+
+  #selected-poses {
+    margin-left: 75px;
+  }
 }
 
 @media (600px < width <=960px) {
@@ -339,6 +335,7 @@ padding:10px;
   #animation {
     background-position: center center;
   }
+
   #main-wrapper {
     width: 70%;
   }
@@ -359,6 +356,7 @@ padding:10px;
   #animation {
     background-position: center center;
   }
+
   #main-wrapper {
     width: 50%;
   }
@@ -379,6 +377,7 @@ padding:10px;
   #animation {
     background-position: center center;
   }
+
   #main-wrapper {
     width: 50%;
   }
