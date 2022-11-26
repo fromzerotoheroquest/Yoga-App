@@ -136,41 +136,34 @@ function animatePlanButton() {
 
 function printPlan() {
 
-  if ($('.chosen').length !== 0) {
-    $("#print-btn").show()
-    $("#print-btn").click(function () {
-
-      shakeButton(this)
-      //hide elements to avoid printing them
-      $("#close-plan-btn, .del-btn, #print-btn, #play-btn, #plan h3").hide();
-      var contents = $("#plan").html();
-      var frame1 = $('<iframe />');
-      frame1[0].name = "frame1";
-      frame1.css({ "position": "absolute", "top": "-1000000px" });
-      $("body").append(frame1);
-      var frameDoc = frame1[0].contentWindow ? frame1[0].contentWindow : frame1[0].contentDocument.document ? frame1[0].contentDocument.document : frame1[0].contentDocument;
-      frameDoc.document.open();
-      //Create a new HTML document.
-      frameDoc.document.write('<html><head><title>Yogup: Your custom yoga plan</title>');
-      frameDoc.document.write('</head><body>');
-      //Append the external CSS file.
-      frameDoc.document.write('<link href="css/style.css" rel="stylesheet" type="text/css" />');
-      //Append the DIV contents.
-      frameDoc.document.write(contents);
-      frameDoc.document.write('</body></html>');
-      frameDoc.document.close();
-      setTimeout(function () {
-        window.frames["frame1"].focus();
-        window.frames["frame1"].print();
-        frame1.remove();
-        //show elements as they were before clicking on print
+    //hide elements to avoid printing them
+    $("#close-plan-btn, .del-btn, #print-btn, #play-btn, #plan h3").hide();
+    var contents = $("#plan").html();
+    var frame1 = $('<iframe />');
+    frame1[0].name = "frame1";
+    frame1.css({ "position": "absolute", "top": "-1000000px" });
+    $("body").append(frame1);
+    var frameDoc = frame1[0].contentWindow ? frame1[0].contentWindow : frame1[0].contentDocument.document ? frame1[0].contentDocument.document : frame1[0].contentDocument;
+    frameDoc.document.open();
+    //Create a new HTML document.
+    frameDoc.document.write('<html><head><title>Yogup: Your custom yoga plan</title>');
+    frameDoc.document.write('</head><body>');
+    //Append the external CSS file.
+    frameDoc.document.write('<link href="css/style.css" rel="stylesheet" type="text/css" />');
+    //Append the DIV contents.
+    frameDoc.document.write(contents);
+    frameDoc.document.write('</body></html>');
+    frameDoc.document.close();
+    setTimeout(function () {
+      window.frames["frame1"].focus();
+      window.frames["frame1"].print();
+      frame1.remove();
+      //show elements as they were before clicking on print
       $("#close-plan-btn, .del-btn, #print-btn, #play-btn, #plan h3").show();
 
-      }, 500);
-      $("#close-plan-btn, .del-btn , #print-btn").show();
+    }, 500);
+    $("#close-plan-btn, .del-btn , #print-btn").show();
 
-    });
-  } else { $("#print-btn").hide() }
 }
 
 // to sort, drag and drop in plan section
@@ -178,14 +171,14 @@ $("#selected-poses").sortable();
 // close plan
 $("#close-plan-btn, #blurry-bg").click(() => {
   $("#plan, #blurry-bg").fadeOut();
-  $("#stop-btn").trigger('click');
-
+  removeSlider()
 })
 
 // encourage to add poses in plan section if it is empty
 function showAdvice() {
   $('#plan-advice').remove()
-  if ($('#selected-poses .clone').length === 0 && $('#selected-poses .counter-pose').length === 0) {
+  if ($('.chosen').length === 0) {
+    $('#play-btn, #print-btn').fadeOut('fast')
     $("#plan").append(
       `<h4 id="plan-advice">Add poses to your plan by clicking on this icon<span class="add-btn" > <img  class="icon" src="assets/add_icon.svg"></span> </h4>`
     )
@@ -199,20 +192,20 @@ function shakeButton(element) {
 }
 
 // Plan button inteface
-$("#plan-btn").click(() => {
+$("#plan-btn").click(function () {
   //hide icons if not selection has been made
+  showAdvice();
+  $('#play-btn, #print-btn').show()
+  $("#plan, #blurry-bg").fadeIn();
+  $('#blurry-bg').css({
+    height: $(document).height() + 'px'
+  })
   if ($('.chosen').length === 0) {
     $('#play-btn, #print-btn').hide()
   }
   if ($('.chosen').length === 1) {
     $('#play-btn').hide()
   }
-  showAdvice();
-  printPlan()
-  $("#plan, #blurry-bg").fadeIn();
-  $('#blurry-bg').css({
-    height: $(document).height() + 'px'
-  })
 })
 
 
@@ -220,7 +213,7 @@ $("#plan-btn").click(() => {
 //slideshow 
 $("#play-btn").click(function () {
 
-  if ($("#gallery-nav").length === 0 && $("#selected-poses>div").length > 1) {
+  if ($("#gallery-nav").length === 0 && $(".chosen").length > 1) {
 
     //hide print button
     $('#print-btn').fadeOut('fast')
@@ -233,7 +226,7 @@ $("#play-btn").click(function () {
     })
     //add class to re-shape the poses
     $("#selected-poses").addClass('gallery')
-    $(".gallery").css({'height': $(".gallery .chosen").outerHeight()})
+    $(".gallery").css({ 'height': $(".gallery .chosen").outerHeight() })
     $(".gallery .del-btn").hide()
 
     //create navigation buttons
@@ -261,20 +254,32 @@ $("#play-btn").click(function () {
   }
 })
 
+
+function removeSlider() {
+  $("#stop-btn").hide()
+  $(".gallery .del-btn").show()
+  $(".gallery").height('auto')
+  $("#selected-poses").removeClass('gallery')
+  $("#gallery-nav").remove()
+}
+
+
 $("#stop-btn").click(function () {
   //effects
   shakeButton(this)
   //switch button
   $("#stop-btn").fadeOut('fast', function () {
-    $("#play-btn").fadeIn('fast')
+    $('#play-btn').fadeIn('fast')
+    $('#print-btn').fadeIn('fast')
+    removeSlider()
   })
-  $(".gallery").height('auto')
 
-  $("#gallery-nav").remove()
-  $(".gallery .del-btn").show()
-  $("#selected-poses").removeClass('gallery')
-  $('#print-btn').fadeIn('fast')
+})
 
+
+$('#print-btn').click(function () {
+  printPlan()
+  console.log('print button clicked')
 })
 
 //landing page animation
