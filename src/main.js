@@ -47,12 +47,12 @@ loadPoses().then(() => {
         <div class="del-btn btn"> <img src="assets/close_icon.svg"/> </div>
         </div>`
       )
-      $(".del-btn").click(function () {
-        $(this).parent().fadeOut('fast', function () {
-          $(this).remove()
-          showAdvice()
-        })
-      })
+      // $(".del-btn").click(function () {
+      //   $(this).parent().fadeOut('fast', function () {
+      //     $(this).remove()
+      //     showAdvice()
+      //   })
+      // })
       $('.clone').fadeIn()
 
       // plan button animation to indicate user that a pose has been added to the plan
@@ -89,39 +89,41 @@ loadPoses().then(() => {
             <div class="del-btn btn"> <img  class="icon" src="assets/close_icon.svg"/> </div>
            </div>`
         )
-        $(".del-btn").click(function () {
-          $(this).parent().fadeOut('fast', function () {
-            $(this).remove()
-            showAdvice()
-          })
-        })
+        // $(".del-btn").click(function () {
+        //   $(this).parent().fadeOut('fast', function () {
+        //     $(this).remove()
+        //     showAdvice()
+        //   })
+        // })
       })
     }
   }
-  //filter buttons
-  function filter(id, category) {
-    $(`#${id}`).click(function () {
-
-      //effect pulsate to help user realise what new elements have been included
-      $(`.${category}`).toggle('pulsate', { times: 1 }, 250)
-      if (!$(`#${id}`).hasClass('filter-on')) {
-        $(`#${id}`).removeClass('filter-off')
-        $(`#${id}`).addClass('filter-on')
-      } else {
-        $(`#${id}`).removeClass('filter-on')
-        $(`#${id}`).addClass('filter-off')
-      }
-    });
-  }
-
-  filter('standing-btn', 'standing')
-  filter('reclining-btn', 'reclining')
-  filter('inversion-btn', 'inversion')
-  filter('backbend-btn', 'back-bend')
-  filter('forwardbend-btn', 'forward-bend')
-  filter('armbalance-btn', 'arm-balance-bend')
+  // default filter
   $('#standing-btn').trigger('click');
 })
+
+//filter ------------------------------------
+function filter(id, category) {
+  $(`#${id}`).click(function () {
+
+    //effect pulsate to help user realise what new elements have been included/removed
+    $(`.${category}`).toggle('pulsate', { times: 1 }, 250)
+    if (!$(`#${id}`).hasClass('filter-on')) {
+      $(`#${id}`).removeClass('filter-off')
+      $(`#${id}`).addClass('filter-on')
+    } else {
+      $(`#${id}`).removeClass('filter-on')
+      $(`#${id}`).addClass('filter-off')
+    }
+  });
+}
+
+filter('standing-btn', 'standing')
+filter('reclining-btn', 'reclining')
+filter('inversion-btn', 'inversion')
+filter('backbend-btn', 'back-bend')
+filter('forwardbend-btn', 'forward-bend')
+filter('armbalance-btn', 'arm-balance-bend')
 
 // plan button animation to indicate user that a pose has been added to the plan
 function animatePlanButton() {
@@ -136,33 +138,33 @@ function animatePlanButton() {
 
 function printPlan() {
 
-    //hide elements to avoid printing them
-    $("#close-plan-btn, .del-btn, #print-btn, #play-btn, #plan h3").hide();
-    var contents = $("#plan").html();
-    var frame1 = $('<iframe />');
-    frame1[0].name = "frame1";
-    frame1.css({ "position": "absolute", "top": "-1000000px" });
-    $("body").append(frame1);
-    var frameDoc = frame1[0].contentWindow ? frame1[0].contentWindow : frame1[0].contentDocument.document ? frame1[0].contentDocument.document : frame1[0].contentDocument;
-    frameDoc.document.open();
-    //Create a new HTML document.
-    frameDoc.document.write('<html><head><title>Yogup: Your custom yoga plan</title>');
-    frameDoc.document.write('</head><body>');
-    //Append the external CSS file.
-    frameDoc.document.write('<link href="css/style.css" rel="stylesheet" type="text/css" />');
-    //Append the DIV contents.
-    frameDoc.document.write(contents);
-    frameDoc.document.write('</body></html>');
-    frameDoc.document.close();
-    setTimeout(function () {
-      window.frames["frame1"].focus();
-      window.frames["frame1"].print();
-      frame1.remove();
-      //show elements as they were before clicking on print
-      $("#close-plan-btn, .del-btn, #print-btn, #play-btn, #plan h3").show();
+  //hide elements to avoid printing them
+  $("#close-plan-btn, .del-btn, #print-btn, #preview-btn, #plan h3").hide();
+  var contents = $("#plan").html();
+  var frame1 = $('<iframe />');
+  frame1[0].name = "frame1";
+  frame1.css({ "position": "absolute", "top": "-1000000px" });
+  $("body").append(frame1);
+  var frameDoc = frame1[0].contentWindow ? frame1[0].contentWindow : frame1[0].contentDocument.document ? frame1[0].contentDocument.document : frame1[0].contentDocument;
+  frameDoc.document.open();
+  //Create a new HTML document.
+  frameDoc.document.write('<html><head><title>Yogup: Your custom yoga plan</title>');
+  frameDoc.document.write('</head><body>');
+  //Append the external CSS file.
+  frameDoc.document.write('<link href="css/style.css" rel="stylesheet" type="text/css" />');
+  //Append the DIV contents.
+  frameDoc.document.write(contents);
+  frameDoc.document.write('</body></html>');
+  frameDoc.document.close();
+  setTimeout(function () {
+    window.frames["frame1"].focus();
+    window.frames["frame1"].print();
+    frame1.remove();
+    //show elements as they were before clicking on print
+    $("#close-plan-btn, .del-btn, #print-btn, #preview-btn, #plan h3").show();
 
-    }, 500);
-    $("#close-plan-btn, .del-btn , #print-btn").show();
+  }, 500);
+  $("#close-plan-btn, .del-btn , #print-btn").show();
 
 }
 
@@ -178,7 +180,7 @@ $("#close-plan-btn, #blurry-bg").click(() => {
 function showAdvice() {
   $('#plan-advice').remove()
   if ($('.chosen').length === 0) {
-    $('#play-btn, #print-btn').fadeOut('fast')
+    $('#preview-btn, #print-btn').fadeOut('fast')
     $("#plan").append(
       `<h4 id="plan-advice">Add poses to your plan by clicking on this icon<span class="add-btn" > <img  class="icon" src="assets/add_icon.svg"></span> </h4>`
     )
@@ -193,25 +195,43 @@ function shakeButton(element) {
 
 // Plan button inteface
 $("#plan-btn").click(function () {
+  // Delete poses function -------------------------
+  let allDeleteButtons = document.querySelectorAll('.del-btn')
+  for (let i = 0; i < allDeleteButtons.length; i++) {
+    allDeleteButtons[i].addEventListener('click', deletePose, false)
+  }
+  
+  function deletePose() {
+    console.log('clicked!')
+    if ($('.chosen').length <= 2) {
+      console.log($('.chosen').length)
+      $('#preview-btn').fadeOut('fast')
+    }
+    $(this).parent().fadeOut('fast', function () {
+      $(this).remove()
+      showAdvice()
+    })
+  }
+  
   //hide icons if not selection has been made
   showAdvice();
-  $('#play-btn, #print-btn').show()
+  $('#preview-btn, #print-btn').show()
   $("#plan, #blurry-bg").fadeIn();
   $('#blurry-bg').css({
     height: $(document).height() + 'px'
   })
   if ($('.chosen').length === 0) {
-    $('#play-btn, #print-btn').hide()
+    $('#preview-btn, #print-btn').hide()
   }
   if ($('.chosen').length === 1) {
-    $('#play-btn').hide()
+    $('#preview-btn').hide()
   }
 })
 
 
 
 //slideshow 
-$("#play-btn").click(function () {
+$("#preview-btn").click(function () {
 
   if ($("#gallery-nav").length === 0 && $(".chosen").length > 1) {
 
@@ -221,8 +241,8 @@ $("#play-btn").click(function () {
     //effects
     shakeButton(this)
     //switch button
-    $("#play-btn").fadeOut('fast', function () {
-      $("#stop-btn").fadeIn('fast')
+    $("#preview-btn").fadeOut('fast', function () {
+      $("#gridview-btn").fadeIn('fast')
     })
     //add class to re-shape the poses
     $("#selected-poses").addClass('gallery')
@@ -236,16 +256,16 @@ $("#play-btn").click(function () {
     for (let i = 0; i < $('.chosen').length; i++) {
       $('#gallery-nav').append(`<div class="topose-btn btn"></div>`)
     }
-    var toPoseButtons = document.querySelectorAll('.topose-btn');
+    let toPoseButtons = document.querySelectorAll('.topose-btn');
     for (let i = 0; i < $('.topose-btn').length; i++) {
-      toPoseButtons[i].addEventListener('click', controls, false);
+      toPoseButtons[i].addEventListener('click', scrollControl, false);
     }
 
     //
     $('.topose-btn').first().addClass('button-on')
     //to control buttons behaviour
-    function controls() {
-      console.log($('.gallery .chosen').outerHeight())
+    function scrollControl() {
+      // console.log($('.gallery .chosen').outerHeight())
       $(this).addClass('button-on').siblings('div').removeClass('button-on');
       $(".gallery").animate({
         scrollTop: $(this).index() * ($('.gallery .chosen').outerHeight())
@@ -256,7 +276,7 @@ $("#play-btn").click(function () {
 
 
 function removeSlider() {
-  $("#stop-btn").hide()
+  $("#gridview-btn").hide()
   $(".gallery .del-btn").show()
   $(".gallery").height('auto')
   $("#selected-poses").removeClass('gallery')
@@ -264,12 +284,12 @@ function removeSlider() {
 }
 
 
-$("#stop-btn").click(function () {
+$("#gridview-btn").click(function () {
   //effects
   shakeButton(this)
   //switch button
-  $("#stop-btn").fadeOut('fast', function () {
-    $('#play-btn').fadeIn('fast')
+  $("#gridview-btn").fadeOut('fast', function () {
+    $('#preview-btn').fadeIn('fast')
     $('#print-btn').fadeIn('fast')
     removeSlider()
   })
