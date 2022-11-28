@@ -191,22 +191,29 @@ function shakeButton(element) {
 
 $("#plan-btn").click(function () {
   //taphold event
-   $(".chosen").on("taphold", { duration: 2000 }, function () {
-    $(this).addClass("taphold");
+   $(".chosen").on("taphold", { duration: 1000 }, function (event) {
+    event.preventDefault(); 
+    $(".chosen").addClass("taphold");
+    shakeButton('.chosen')
     $("#selected-poses").sortable({
       disabled: false
     });
   })
   
-  $(".chosen").on("dblclick", function () {
+  $(".chosen").on("doubletap", function () {
     $(".chosen").removeClass("taphold");
     $("#selected-poses").sortable({
       disabled: true
     });
-
   });
 
-
+  //just in case users click anywhere else before doubletapping
+  $('#preview-btn, #print-btn, #close-plan-btn, #blurry-bg').click(function () {
+    $(".chosen").removeClass("taphold");
+    $("#selected-poses").sortable({
+      disabled: true
+    });
+  })
 
   // Delete poses function -------------------------
   let allDeleteButtons = document.querySelectorAll('.del-btn')

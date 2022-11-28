@@ -1,10 +1,9 @@
 /* main colours */
 /* blue #3a5d83; */
 /* violet #bd70ef; */
-.taphold {
-  background-color: #bd70ef !important;
-  cursor:grab;
-}  
+
+
+
 
 html,
 body {
@@ -108,7 +107,7 @@ main {
 #plan-advice {
   display: flex;
   align-items: center;
-  padding: 0 15px;
+  /* padding: 0 15px; */
 }
 
 #plan-tips {
@@ -120,6 +119,30 @@ main {
   grid-template-columns: 1fr 1fr;
 }
 
+/* class for arranging poses */
+.taphold {
+  background-color: #bd70ef;
+  cursor:grab;
+  
+  animation: pulse 2s infinite;
+}
+
+/* weird fix */
+html, body, a, img {
+  -webkit-touch-callout: none !important;
+}
+
+@keyframes pulse {
+  0% {
+    background-color: #bd70ef;
+  }
+  50% {
+    background-color: #bc70ef85;
+  }
+  100% {
+    background-color: #bd70ef;
+  }
+}
 #poses div {
   padding: 5px;
 }
