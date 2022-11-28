@@ -47,12 +47,6 @@ loadPoses().then(() => {
         <div class="del-btn btn"> <img src="assets/close_icon.svg"/> </div>
         </div>`
       )
-      // $(".del-btn").click(function () {
-      //   $(this).parent().fadeOut('fast', function () {
-      //     $(this).remove()
-      //     showAdvice()
-      //   })
-      // })
       $('.clone').fadeIn()
 
       // plan button animation to indicate user that a pose has been added to the plan
@@ -65,13 +59,14 @@ loadPoses().then(() => {
       $(`#pose-${poses[i].id} .counter-wrapper`).slideToggle()
     })
 
-
-
     //counter poses
     for (let j = 0; j < poses[i].counterpose.length; j++) {
 
       $(`#pose-${poses[i].id} .counter-wrapper`).append(
-        `<div class="english">${poses[i].counterpose[j].english} </div>`
+        `<div class="english">${poses[i].counterpose[j].english} </div>
+        <div class="counter-pose-icon"><img class="icon" src="assets/poses/${poses[i].counterpose[j].image}"/></div>
+        
+        `
       );
       $(`#pose-${poses[i].id} .counter-wrapper`).append(
         `<div id="pose-${poses[i].id}-counter-${poses[i].counterpose[j].id}" class="add-btn btn" > <img  class="icon" src="assets/add_icon.svg"></div>`
@@ -139,7 +134,7 @@ function animatePlanButton() {
 function printPlan() {
 
   //hide elements to avoid printing them
-  $("#close-plan-btn, .del-btn, #print-btn, #preview-btn, #plan h3").hide();
+  $("#close-plan-btn, .del-btn, #print-btn, #preview-btn, #plan h3, #plan-tips").hide();
   var contents = $("#plan").html();
   var frame1 = $('<iframe />');
   frame1[0].name = "frame1";
@@ -161,7 +156,7 @@ function printPlan() {
     window.frames["frame1"].print();
     frame1.remove();
     //show elements as they were before clicking on print
-    $("#close-plan-btn, .del-btn, #print-btn, #preview-btn, #plan h3").show();
+    $("#close-plan-btn, .del-btn, #print-btn, #preview-btn, #plan h3, #plan-tips").show();
 
   }, 500);
   $("#close-plan-btn, .del-btn , #print-btn").show();
@@ -169,7 +164,8 @@ function printPlan() {
 }
 
 // to sort, drag and drop in plan section
-$("#selected-poses").sortable();
+// $("#selected-poses").sortable();
+
 // close plan
 $("#close-plan-btn, #blurry-bg").click(() => {
   $("#plan, #blurry-bg").fadeOut();
@@ -193,14 +189,31 @@ function shakeButton(element) {
   $(element).effect('shake', { direction: "right", times: 1.5, distance: 5 }, 300)
 }
 
-// Plan button inteface
 $("#plan-btn").click(function () {
+  //taphold event
+   $(".chosen").on("taphold", { duration: 2000 }, function () {
+    $(this).addClass("taphold");
+    $("#selected-poses").sortable({
+      disabled: false
+    });
+  })
+  
+  $(".chosen").on("dblclick", function () {
+    $(".chosen").removeClass("taphold");
+    $("#selected-poses").sortable({
+      disabled: true
+    });
+
+  });
+
+
+
   // Delete poses function -------------------------
   let allDeleteButtons = document.querySelectorAll('.del-btn')
   for (let i = 0; i < allDeleteButtons.length; i++) {
     allDeleteButtons[i].addEventListener('click', deletePose, false)
   }
-  
+
   function deletePose() {
     console.log('clicked!')
     if ($('.chosen').length <= 2) {
@@ -212,7 +225,7 @@ $("#plan-btn").click(function () {
       showAdvice()
     })
   }
-  
+
   //hide icons if not selection has been made
   showAdvice();
   $('#preview-btn, #print-btn').show()
@@ -236,7 +249,7 @@ $("#preview-btn").click(function () {
   if ($("#gallery-nav").length === 0 && $(".chosen").length > 1) {
 
     //hide print button
-    $('#print-btn').fadeOut('fast')
+    $('#print-btn, #plan-tips').fadeOut('fast')
 
     //effects
     shakeButton(this)
@@ -281,6 +294,7 @@ function removeSlider() {
   $(".gallery").height('auto')
   $("#selected-poses").removeClass('gallery')
   $("#gallery-nav").remove()
+  $("#plan-tips").fadeIn('fast')
 }
 
 
@@ -317,4 +331,7 @@ function landingAnimation(speed1, speed2) {
     zIndex: -5
   })
 }
+
 landingAnimation(500, 1000) //500, 1000 nice
+
+

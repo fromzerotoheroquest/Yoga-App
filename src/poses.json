@@ -64,8 +64,8 @@
   },
   {
     "id": 5,
-    "english": "Mountain Pose",
-    "sanskrit": "Tadasana",
+    "english": "Demo Pose",
+    "sanskrit": "demno",
     "category": "standing",
     "image": "mountain.svg",
     "counterpose": []

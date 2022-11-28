@@ -1,7 +1,10 @@
 /* main colours */
 /* blue #3a5d83; */
-/* orange #bd70ef; */
-
+/* violet #bd70ef; */
+.taphold {
+  background-color: #bd70ef !important;
+  cursor:grab;
+}  
 
 html,
 body {
@@ -108,9 +111,8 @@ main {
   padding: 0 15px;
 }
 
-#plan .clone {
-  display: none;
-  cursor: grab;
+#plan-tips {
+  font-size: 14px;
 }
 
 #selected-poses {
@@ -140,6 +142,10 @@ main {
 }
 
 /* buttons */
+.counter-pose-icon {
+  float: left;
+}
+
 .icon {
   height: 40px;
 }
@@ -309,9 +315,6 @@ main {
     grid-template-columns: 1fr 1fr;
   }
 
-  #selected-poses {
-    margin-left: 75px;
-  }
 }
 
 @media (600px < width <=960px) {
