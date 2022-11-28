@@ -1,3 +1,12 @@
+//disable right click to avoid menu pop-up when tapholding to arrange poses.
+function disableRightClick() {
+  window.addEventListener("contextmenu", e => e.preventDefault());
+}
+
+disableRightClick()
+
+
+//load poses
 let poses = []
 
 async function loadPoses() {
@@ -192,7 +201,12 @@ function shakeButton(element) {
 $("#plan-btn").click(function () {
   //taphold event
    $(".chosen").on("taphold", { duration: 1000 }, function (event) {
-    event.preventDefault(); 
+    // in case the user taphold more than once before doubletapping
+    $(".chosen").removeClass("taphold");
+    $("#selected-poses").sortable({
+      disabled: true
+    });
+
     $(".chosen").addClass("taphold");
     shakeButton('.chosen')
     $("#selected-poses").sortable({
@@ -340,5 +354,4 @@ function landingAnimation(speed1, speed2) {
 }
 
 landingAnimation(500, 1000) //500, 1000 nice
-
 
