@@ -207,6 +207,9 @@ function shakeButton(element) {
 }
 
 $("#plan-btn").click(function () {
+  //hide del buttons
+  $('#plan .del-btn').hide()
+
   //taphold event
   $(".chosen").on("taphold", { duration: 1000 }, function (event) {
     // in case the user taphold more than once before doubletapping
@@ -216,7 +219,7 @@ $("#plan-btn").click(function () {
     });
 
     $(".chosen").addClass("taphold");
-    shakeButton('.chosen')
+    // shakeButton('.chosen')
     $("#selected-poses").sortable({
       disabled: false
     });
@@ -355,6 +358,7 @@ function removeSlider() {
   $("#selected-poses").removeClass('gallery')
   $("#gallery-nav").remove()
   $("#plan-tips").fadeIn('fast')
+  $('#plan .del-btn').hide()
 }
 
 
