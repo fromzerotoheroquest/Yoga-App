@@ -1,3 +1,4 @@
+
 // disable right click to avoid menu pop-up when tapholding to arrange poses.
 function disableRightClick() {
   const noContext = document.querySelectorAll('img')
@@ -19,15 +20,16 @@ async function loadPoses() {
       // console.log(allposes.data);
       // console.log(allposes.data.length)
       poses = allposes.data
-      return poses
+      // return poses
     })
     .catch((err) => {
       console.log("rejected: ", err);
     });
+
 }
 
 loadPoses().then(() => {
-
+  console.time()
   for (let i = 0; i < poses.length; i++) {
     $("#poses").append(
       `<div id="pose-${poses[i].id}" class="pose ${poses[i].category}">
@@ -107,6 +109,9 @@ loadPoses().then(() => {
   }
   // default filter
   $('#standing-btn').trigger('click');
+  console.timeEnd()
+
+
 })
 
 //filter ------------------------------------
@@ -146,7 +151,7 @@ function animatePlanButton() {
 function printPlan() {
 
   //hide elements to avoid printing them
-  $("#close-plan-btn, .del-btn, #print-btn, #preview-btn, #plan h3, #plan-tips").hide();
+  $("#close-plan-btn, .del-btn, #print-btn, #preview-btn, #plan h3, #plan-tips, #edit-btn, #save-btn").hide();
   var contents = $("#plan").html();
   var frame1 = $('<iframe />');
   frame1[0].name = "frame1";
@@ -155,7 +160,7 @@ function printPlan() {
   var frameDoc = frame1[0].contentWindow ? frame1[0].contentWindow : frame1[0].contentDocument.document ? frame1[0].contentDocument.document : frame1[0].contentDocument;
   frameDoc.document.open();
   //Create a new HTML document.
-  frameDoc.document.write('<html><head><title>Yogup: Your custom yoga plan</title>');
+  // frameDoc.document.write('<html><head><title>Yogup: Your custom yoga plan</title>');
   frameDoc.document.write('</head><body>');
   //Append the external CSS file.
   frameDoc.document.write('<link href="css/style.css" rel="stylesheet" type="text/css" />');
@@ -168,7 +173,7 @@ function printPlan() {
     window.frames["frame1"].print();
     frame1.remove();
     //show elements as they were before clicking on print
-    $("#close-plan-btn, .del-btn, #print-btn, #preview-btn, #plan h3, #plan-tips").show();
+    $("#close-plan-btn, .del-btn, #print-btn, #preview-btn, #plan h3, #plan-tips, #edit-btn, #save-btn").show();
 
   }, 500);
   $("#close-plan-btn, .del-btn , #print-btn").show();
@@ -215,6 +220,9 @@ $("#plan-btn").click(function () {
     $("#selected-poses").sortable({
       disabled: false
     });
+
+    // show del buttons
+    $('#plan .del-btn').fadeIn()
   })
 
   $(".chosen").on("doubletap", function () {
@@ -222,6 +230,8 @@ $("#plan-btn").click(function () {
     $("#selected-poses").sortable({
       disabled: true
     });
+    // hide del buttons
+    $('#plan .del-btn').fadeOut()
   });
 
   //just in case users click anywhere else before doubletapping
@@ -304,12 +314,38 @@ $("#preview-btn").click(function () {
     function scrollControl() {
       // console.log($('.gallery .chosen').outerHeight())
       $(this).addClass('button-on').siblings('div').removeClass('button-on');
-      $(".gallery").animate({
+      $(".gallery").stop().animate({
         scrollTop: $(this).index() * ($('.gallery .chosen').outerHeight())
       }, 2000, 'easeInOutQuint');
     }
   }
 })
+
+
+// edit name of the yoga plan
+$('#edit-btn').click(function () {
+  // let $div=$('#plan h3'), isEditable
+  shakeButton(this)
+
+  $('.title').prop('contenteditable', true)
+  $('.title').addClass('editable')
+  $('#edit-btn').fadeOut(function () {
+    $('#save-btn').fadeIn()
+  })
+})
+
+$('#save-btn').click(function () {
+  shakeButton(this)
+
+  $('.title').prop('contenteditable', false)
+  $('.title').removeClass('editable')
+  $('#save-btn').fadeOut(function () {
+    $('#edit-btn').fadeIn()
+  })
+
+})
+
+
 
 
 function removeSlider() {

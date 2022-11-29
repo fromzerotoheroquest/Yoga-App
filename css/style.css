@@ -98,10 +98,15 @@ main {
   box-shadow: 1px 1px 15px #323232;
 }
 
-#plan h3 {
+#plan-nav {
+  font-size: 22px;
   display: flex;
   align-items: center;
   color: #bd70ef;
+}
+
+#plan-nav div {
+  margin-right: 5px;
 }
 
 #plan-advice {
@@ -117,6 +122,10 @@ main {
 #selected-poses {
   display: grid;
   grid-template-columns: 1fr 1fr;
+}
+
+#plan .del-btn {
+  display:none;
 }
 
 /* class for arranging poses */
@@ -160,6 +169,29 @@ main {
 }
 
 /* buttons */
+.editable {
+
+  background-color: #ffffff;
+  animation: edit 1s infinite;
+}
+
+@keyframes edit {
+  0% {
+    background-color: #bc70ef4b;
+  }
+  50% {
+    background-color: #fff;
+  }
+  100% {
+    background-color: #bc70ef4b;
+  }
+}
+
+#save-btn { 
+  display:  none;
+}
+
+
 .counter-pose-icon {
   float: left;
 }

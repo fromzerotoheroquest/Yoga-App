@@ -23,7 +23,9 @@
   <script src="src/poses.json" defer></script>
 
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-touch-events/2.0.3/jquery.mobile-events.min.js" integrity="sha512-cbHKEp1NB9R746n/1SEKKc8kJuqqeT1JNainv36ZK9GjEZ9xlSvucx7Y2u9UCB605tfjHGWbfDeOHiTKJeKo3g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-touch-events/2.0.3/jquery.mobile-events.min.js"
+    integrity="sha512-cbHKEp1NB9R746n/1SEKKc8kJuqqeT1JNainv36ZK9GjEZ9xlSvucx7Y2u9UCB605tfjHGWbfDeOHiTKJeKo3g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
   <script src="src/main.js" defer></script>
   <title>YogUp</title>
@@ -63,19 +65,26 @@
       </div>
       <div id="poses"></div>
       <div id="plan">
-        <h3>Yoga plan
-          &nbsp;
+        <div id="plan-nav">
+          <div class="title"> Yoga plan</div>
           
+          <div id="edit-btn" class="btn">
+            <img src="assets/edit_icon.svg" alt="" title="Change plan name">
+          </div>
+          <div id="save-btn" class="btn">
+            <img src="assets/save_icon.svg" alt="" title="Save plan name">
+          </div> 
           <div id="preview-btn" class="btn">
-            <img src="assets/play_icon.svg" alt="">
+            <img src="assets/play_icon.svg" alt="" title="Slideshow">
           </div>
           <div id="gridview-btn" class="btn">
-            <img src="assets/stop_icon.svg" alt="">
+            <img src="assets/stop_icon.svg" alt="" title="Grid view">
           </div>
-          &nbsp;
-          <div id="print-btn" class="btn">&nbsp;<img src="assets/download_icon.svg" alt=""></div>
-        </h3>
-        <p id="plan-tips"><b>Tip:</b>  Tap/click and Hold a pose for 2 seconds to arrange order. Double click when you are done</p>
+          <div id="print-btn" class="btn"><img src="assets/download_icon.svg" alt=""></div>
+
+        </div>
+        <p id="plan-tips"><b>Tip:</b> Tap/click and Hold a pose for 2 seconds to arrange order. Double click when you
+          are done</p>
 
 
 
