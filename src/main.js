@@ -1,3 +1,58 @@
+// auto save to local storage
+let planTitle = document.querySelector('#title');
+let planPoses = document.querySelector('#selected-poses');
+let savedTitle = localStorage.getItem('planTitleStored');
+let savedPoses = localStorage.getItem('planPosesStored');
+
+// If there are any saved items, update our list
+if (savedTitle) {
+  planTitle.innerHTML = savedTitle;
+}
+if (savedPoses) {
+  planPoses.innerHTML = savedPoses;
+}
+function saveToLocalStorage() {
+  localStorage.setItem('planTitleStored', planTitle.innerHTML);
+  localStorage.setItem('planPosesStored', planPoses.innerHTML);
+}
+
+function deleteFromLocalStorage() {
+  window.localStorage.removeItem('planTitleStored');
+  window.localStorage.removeItem('planPosesStored');
+}
+
+//local storage interaction
+
+$('#delete-btn').click(function () {
+  $('#delete-warning').fadeIn()
+})
+
+$('#yes-del-btn').click(function () {
+  shakeButton(this)
+
+  deleteFromLocalStorage()
+  $('.chosen').fadeOut(function () {
+    $('.chosen').remove()
+  })
+  $('#delete-warning').fadeOut()
+
+})
+
+$('#no-del-btn').click(function () {
+  shakeButton(this)
+
+  $('#delete-warning').fadeOut()
+
+})
+
+
+$('#save-btn').click(function () {
+  saveToLocalStorage()
+  $('#save-warning').fadeIn('slow').delay(1500).fadeOut('slow')
+})
+
+// window.localStorage.clear()
+
 
 // disable right click to avoid menu pop-up when tapholding to arrange poses.
 function disableRightClick() {
@@ -98,12 +153,7 @@ loadPoses().then(() => {
             <div class="del-btn btn"> <img  class="icon" src="assets/close_icon.svg"/> </div>
            </div>`
         )
-        // $(".del-btn").click(function () {
-        //   $(this).parent().fadeOut('fast', function () {
-        //     $(this).remove()
-        //     showAdvice()
-        //   })
-        // })
+
       })
     }
   }
@@ -151,7 +201,7 @@ function animatePlanButton() {
 function printPlan() {
 
   //hide elements to avoid printing them
-  $("#close-plan-btn, .del-btn, #print-btn, #preview-btn, #plan h3, #plan-tips, #edit-btn, #save-btn").hide();
+  $("#close-plan-btn, .del-btn, #print-btn, #preview-btn, #plan-tips, #save-btn, #delete-btn, #edit-btn").hide();
   var contents = $("#plan").html();
   var frame1 = $('<iframe />');
   frame1[0].name = "frame1";
@@ -173,7 +223,7 @@ function printPlan() {
     window.frames["frame1"].print();
     frame1.remove();
     //show elements as they were before clicking on print
-    $("#close-plan-btn, .del-btn, #print-btn, #preview-btn, #plan h3, #plan-tips, #edit-btn, #save-btn").show();
+    $("#close-plan-btn, .del-btn, #print-btn, #preview-btn, #plan-tips, #save-btn, #delete-btn, #edit-btn").show();
 
   }, 500);
   $("#close-plan-btn, .del-btn , #print-btn").show();
@@ -285,8 +335,8 @@ $("#preview-btn").click(function () {
 
   if ($("#gallery-nav").length === 0 && $(".chosen").length > 1) {
 
-    //hide print button
-    $('#print-btn, #plan-tips').fadeOut('fast')
+    //hide buttons
+    $('#print-btn, #plan-tips, #save-btn, #delete-btn, #edit-btn').fadeOut('fast')
 
     //effects
     shakeButton(this)
@@ -324,32 +374,37 @@ $("#preview-btn").click(function () {
   }
 })
 
+$("#gridview-btn").click(function () {
+  //effects
+  shakeButton(this)
+  //switch button
+  $("#gridview-btn").fadeOut('fast', function () {
+    $('#preview-btn, #print-btn, #save-btn, #delete-btn, #edit-btn').fadeIn('fast')
+    removeSlider()
+  })
 
+})
 // edit name of the yoga plan
 $('#edit-btn').click(function () {
   // let $div=$('#plan h3'), isEditable
   shakeButton(this)
 
-  $('.title').prop('contenteditable', true)
-  $('.title').addClass('editable')
+  $('#title').prop('contenteditable', true)
+  $('#title').addClass('editable')
   $('#edit-btn').fadeOut(function () {
-    $('#save-btn').fadeIn()
+    $('#done-btn').fadeIn()
   })
 })
 
-$('#save-btn').click(function () {
+$('#done-btn').click(function () {
   shakeButton(this)
 
-  $('.title').prop('contenteditable', false)
-  $('.title').removeClass('editable')
-  $('#save-btn').fadeOut(function () {
+  $('#title').prop('contenteditable', false)
+  $('#title').removeClass('editable')
+  $('#done-btn').fadeOut(function () {
     $('#edit-btn').fadeIn()
   })
-
 })
-
-
-
 
 function removeSlider() {
   $("#gridview-btn").hide()
@@ -362,17 +417,7 @@ function removeSlider() {
 }
 
 
-$("#gridview-btn").click(function () {
-  //effects
-  shakeButton(this)
-  //switch button
-  $("#gridview-btn").fadeOut('fast', function () {
-    $('#preview-btn').fadeIn('fast')
-    $('#print-btn').fadeIn('fast')
-    removeSlider()
-  })
 
-})
 
 
 $('#print-btn').click(function () {
@@ -396,5 +441,7 @@ function landingAnimation(speed1, speed2) {
   })
 }
 
-landingAnimation(500, 1000) //500, 1000 nice
 
+
+
+landingAnimation(500, 1000) //500, 1000 nice
