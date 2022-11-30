@@ -125,14 +125,19 @@ main {
 }
 
 #plan-nav {
+  margin-top: 10px;
   font-size: 22px;
   display: flex;
   align-items: center;
   color: #bd70ef;
 }
 
+#plan-nav img {
+  width: 35px;
+}
+
 #plan-nav div {
-  margin-right: 5px;
+  margin-right: 10px;
 }
 
 #plan-advice {
