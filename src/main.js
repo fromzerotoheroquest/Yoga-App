@@ -242,7 +242,8 @@ function printPlan() {
 // close plan
 $("#close-plan-btn, #blurry-bg").click(() => {
   $("#plan, #blurry-bg").fadeOut();
-  removeSlider()
+  $("#gridview-btn").trigger('click')
+  // removeSlider()
 })
 
 // encourage to add poses in plan section if it is empty
@@ -366,7 +367,6 @@ $("#preview-btn").click(function () {
     for (let i = 0; i < $('.topose-btn').length; i++) {
       toPoseButtons[i].addEventListener('click', scrollControl, false);
     }
-
     //
     $('.topose-btn').first().addClass('button-on')
     //to control buttons behaviour
@@ -392,9 +392,7 @@ $("#gridview-btn").click(function () {
 })
 // edit name of the yoga plan
 $('#edit-btn').click(function () {
-  // let $div=$('#plan h3'), isEditable
   shakeButton(this)
-
   $('#title').prop('contenteditable', true)
   $('#title').addClass('editable')
   $('#edit-btn').fadeOut(function () {
@@ -404,7 +402,6 @@ $('#edit-btn').click(function () {
 
 $('#done-btn').click(function () {
   shakeButton(this)
-
   $('#title').prop('contenteditable', false)
   $('#title').removeClass('editable')
   $('#done-btn').fadeOut(function () {
@@ -414,18 +411,11 @@ $('#done-btn').click(function () {
 
 function removeSlider() {
   $("#gridview-btn").hide()
-  // $(".gallery .del-btn").show()
   $(".gallery").height('auto')
   $("#selected-poses").removeClass('gallery')
   $("#gallery-nav").remove()
   $("#plan-tips").fadeIn('fast')
-  // $('#plan .del-btn').hide()
-  $('#edit-btn, #save-btn, #delete-btn').show()
 }
-
-
-
-
 
 $('#print-btn').click(function () {
   printPlan()
@@ -447,8 +437,5 @@ function landingAnimation(speed1, speed2) {
     zIndex: -5
   })
 }
-
-
-
 
 landingAnimation(500, 1000) //500, 1000 nice
