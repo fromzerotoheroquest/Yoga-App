@@ -84,6 +84,19 @@ main {
 }
 
 /* plan */
+
+#warning {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  min-height: 100%;
+  z-index: 500;
+  background-color: rgba(0, 0, 0, 0.118);
+
+}
+
 #delete-warning, #save-warning {
   display:none;
   position: absolute;
@@ -101,6 +114,8 @@ main {
   color: #fff;
   text-align: center;
   padding: 30px;
+  z-index:1000;
+
 }
 
 .warning-btn {
@@ -125,11 +140,15 @@ main {
 }
 
 #plan-nav {
-  margin-top: 10px;
-  font-size: 22px;
   display: flex;
   align-items: center;
+}
+
+#title {
+  margin: 8px 0 5px 0;
+  font-size: 22px;
   color: #bd70ef;
+  width: 90%;
 }
 
 #plan-nav img {

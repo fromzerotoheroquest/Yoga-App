@@ -24,31 +24,37 @@ function deleteFromLocalStorage() {
 //local storage interaction
 
 $('#delete-btn').click(function () {
-  $('#delete-warning').fadeIn()
+  shakeButton(this)
+  $('#warning, #delete-warning').fadeIn()
+  $('#warning').css({
+    height: $(document).height() + 'px',
+    width: $(document).width() + 'px'
+
+  })
 })
 
 $('#yes-del-btn').click(function () {
   shakeButton(this)
-
   deleteFromLocalStorage()
   $('.chosen').fadeOut(function () {
     $('.chosen').remove()
   })
-  $('#delete-warning').fadeOut()
-
+  $('#warning, #delete-warning').fadeOut()
+  $('#title').html('Yoga plan')
 })
 
 $('#no-del-btn').click(function () {
   shakeButton(this)
 
-  $('#delete-warning').fadeOut()
+  $('#warning, #delete-warning').fadeOut()
 
 })
 
 
 $('#save-btn').click(function () {
+  shakeButton(this)
   saveToLocalStorage()
-  $('#save-warning').fadeIn('slow').delay(1500).fadeOut('slow')
+  $('#warning, #save-warning').fadeIn('slow').delay(1500).fadeOut('slow')
 })
 
 // window.localStorage.clear()
