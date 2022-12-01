@@ -414,12 +414,13 @@ $('#done-btn').click(function () {
 
 function removeSlider() {
   $("#gridview-btn").hide()
-  $(".gallery .del-btn").show()
+  // $(".gallery .del-btn").show()
   $(".gallery").height('auto')
   $("#selected-poses").removeClass('gallery')
   $("#gallery-nav").remove()
   $("#plan-tips").fadeIn('fast')
-  $('#plan .del-btn').hide()
+  // $('#plan .del-btn').hide()
+  $('#edit-btn, #save-btn, #delete-btn').show()
 }
 
 
