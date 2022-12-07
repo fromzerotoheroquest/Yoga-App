@@ -97,7 +97,7 @@
     "id": 7,
     "english": "Crow",
     "sanskrit": "Bakasana",
-    "category": "armbalance",
+    "category": "balancing",
     "image": "crow.svg",
     "counterpose": [
       {
@@ -113,7 +113,7 @@
     "id": 8,
     "english": "Plank",
     "sanskrit": "Phalakasana",
-    "category": "armbalance",
+    "category": "balancing",
     "image": "plank.svg",
     "counterpose": [
       {
