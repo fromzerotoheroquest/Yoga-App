@@ -164,7 +164,7 @@ loadPoses().then(() => {
     }
   }
   // default filter
-  $('#standing-btn').trigger('click');
+  $('#standing-btn, #reclining-btn, #inversion-btn, #bend-btn, #armbalance-btn').trigger('click');
   console.timeEnd()
 
 
@@ -189,9 +189,8 @@ function filter(id, category) {
 filter('standing-btn', 'standing')
 filter('reclining-btn', 'reclining')
 filter('inversion-btn', 'inversion')
-filter('backbend-btn', 'back-bend')
-filter('forwardbend-btn', 'forward-bend')
-filter('armbalance-btn', 'arm-balance-bend')
+filter('bend-btn', 'bend')
+filter('armbalance-btn', 'armbalance')
 
 // plan button animation to indicate user that a pose has been added to the plan
 function animatePlanButton() {

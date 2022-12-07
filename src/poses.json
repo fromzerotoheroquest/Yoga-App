@@ -1,14 +1,14 @@
 [
   {
     "id": 1,
-    "english": "Mountain Pose",
+    "english": "Mountain",
     "sanskrit": "Tadasana",
     "category": "standing",
     "image": "mountain.svg",
     "counterpose": [
       {
         "id": 2,
-        "english": "Corpse Pose",
+        "english": "Corpse",
         "sanskrit": "Savasana",
         "category": "reclining",
         "image": "corpse.svg"
@@ -24,7 +24,7 @@
   },
   {
     "id": 2,
-    "english": "Corpse Pose",
+    "english": "Corpse",
     "sanskrit": "Savasana",
     "category": "reclining",
     "image": "corpse.svg",
@@ -41,7 +41,7 @@
         "id": 4,
         "english": "Upward facing dog",
         "sanskrit": "Urdhva Mukha Svanasana",
-        "category": "back-bend",
+        "category": "bend",
         "image": "updog.svg"
       }
     ]
@@ -50,7 +50,7 @@
     "id": 4,
     "english": "Upward facing dog",
     "sanskrit": "Urdhva Mukha Svanasana",
-    "category": "back-bend",
+    "category": "bend",
     "image": "updog.svg",
     "counterpose": [
       {
@@ -64,10 +64,65 @@
   },
   {
     "id": 5,
-    "english": "Demo Pose",
-    "sanskrit": "demno",
-    "category": "standing",
-    "image": "mountain.svg",
+    "english": "Handstand",
+    "sanskrit": "Adho Mukha Vrksasana",
+    "category": "inversion",
+    "image": "handstand.svg",
+    "counterpose": [
+      {
+        "id": 3,
+        "english": "Downward facing dog",
+        "sanskrit": "Adho Mukha Svanasana",
+        "category": "inversion",
+        "image": "downdog.svg"
+      },
+      {
+        "id": 6,
+        "english": "Child",
+        "sanskrit": "Balasana",
+        "category": "bend",
+        "image": "child.svg"
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "english": "Child",
+    "sanskrit": "Balasana",
+    "category": "bend",
+    "image": "child.svg",
     "counterpose": []
+  },
+  {
+    "id": 7,
+    "english": "Crow",
+    "sanskrit": "Bakasana",
+    "category": "armbalance",
+    "image": "crow.svg",
+    "counterpose": [
+      {
+        "id": 3,
+        "english": "Downward facing dog",
+        "sanskrit": "Adho Mukha Svanasana",
+        "category": "inversion",
+        "image": "downdog.svg"
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "english": "Plank",
+    "sanskrit": "Phalakasana",
+    "category": "armbalance",
+    "image": "plank.svg",
+    "counterpose": [
+      {
+        "id": 6,
+        "english": "Child",
+        "sanskrit": "Balasana",
+        "category": "bend",
+        "image": "child.svg"
+      }
+    ]
   }
 ]
