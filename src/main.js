@@ -423,18 +423,25 @@ $('#print-btn').click(function () {
 
 //landing page animation
 function landingAnimation(speed1, speed2) {
-  $('#animation').css({
-    backgroundSize: '200%',
-    height: $(document).height() + 'px'
-  })
-  $('#animation').animate({
-    backgroundSize: '170%',
-  }, speed1, 'easeInBounce').animate({
-    backgroundSize: '120%'
-  }, speed2, 'easeInOutQuint').animate({
-    opacity: '.4',
-    zIndex: -5
-  })
+  if (parseInt(sessionStorage.getItem('animationDisplayed')) !== 1) {
+    let displayed = 1
+    sessionStorage.setItem('animationDisplayed', displayed);
+    $('#animation').css({
+      backgroundSize: '200%',
+      height: $(document).height() + 'px',
+      zIndex: 1000,
+      opacity: '1'
+
+    })
+    $('#animation').animate({
+      backgroundSize: '170%',
+    }, speed1, 'easeInBounce').animate({
+      backgroundSize: '100%'
+    }, speed2, 'easeInOutQuint').animate({
+      opacity: '.4',
+      zIndex: -5
+    })
+  }
 }
 
 landingAnimation(500, 1000) //500, 1000 nice
