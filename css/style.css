@@ -64,7 +64,7 @@ main {
 
 .illustration img {
   width: 100%;
-  background-color: #ebebeb;
+  background-color: #dddddd;
   min-width: 100px;
 }
 
@@ -204,7 +204,7 @@ main {
 .pose,
 .counter-pose {
   margin: 3px;
-  background-color: #f7f7f7;
+  background-color: #edebeb;
   border-radius: 10px;
   position: relative;
 }
