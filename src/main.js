@@ -265,7 +265,7 @@ function shakeButton(element) {
 
 $("#plan-btn").click(function () {
   //hide del buttons
-  $('#plan .del-btn').hide()
+  // $('#plan .del-btn').hide()
 
   //taphold event
   $(".chosen").on("taphold", { duration: 1000 }, function (event) {
@@ -282,7 +282,7 @@ $("#plan-btn").click(function () {
     });
 
     // show del buttons
-    $('#plan .del-btn').fadeIn()
+    // $('#plan .del-btn').fadeIn()
   })
 
   $(".chosen").on("doubletap", function () {
@@ -291,7 +291,7 @@ $("#plan-btn").click(function () {
       disabled: true
     });
     // hide del buttons
-    $('#plan .del-btn').fadeOut()
+    // $('#plan .del-btn').fadeOut()
   });
 
   //just in case users click anywhere else before doubletapping
@@ -441,6 +441,13 @@ function landingAnimation(speed1, speed2) {
     }, speed2, 'easeInOutQuint').animate({
       opacity: '.4',
       zIndex: -5
+    })
+  } else {
+    $('#animation').css({
+      backgroundSize: '100%',
+      height: $(document).height() + 'px',
+      zIndex: -5,
+      opacity: '.5'
     })
   }
 }

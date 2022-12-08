@@ -24,7 +24,7 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   opacity: .4;
-  z-index: -5;
+  z-index: 1000;
 }
 
 header h3 {
