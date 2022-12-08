@@ -240,8 +240,9 @@ function printPlan() {
 
 // close plan
 $("#close-plan-btn, #blurry-bg").click(() => {
-  $("#plan, #blurry-bg").fadeOut();
-  $("#gridview-btn").trigger('click')
+  $("#plan, #blurry-bg").fadeOut(function (){
+    $("#gridview-btn").trigger('click')
+  });
   // removeSlider()
 })
 
