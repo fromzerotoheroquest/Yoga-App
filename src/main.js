@@ -125,7 +125,7 @@ loadPoses().then(() => {
       $('.clone').fadeIn()
 
       // plan button animation to indicate user that a pose has been added to the plan
-      animatePlanButton()
+      highlightButton('#plan-btn')
     })
 
     //counter poses buttons
@@ -149,8 +149,9 @@ loadPoses().then(() => {
       //add pose to selected poses
       $(`#pose-${poses[i].id}-counter-${poses[i].counterpose[j].id}`).click(function () {
         // plan button animation to indicate user that a pose has been added to the plan
-        shakeButton(this)
-        animatePlanButton()
+        highlightButton('#plan-btn')
+        standoutButton(this)
+
         $("#selected-poses").append(
           `<div class="counter-pose chosen">
             <div class="illustration"><img src="assets/poses/${poses[i].counterpose[j].image}"/></div>
@@ -193,12 +194,21 @@ filter('bend-btn', 'bend')
 filter('balancing-btn', 'balancing')
 
 // plan button animation to indicate user that a pose has been added to the plan
-function animatePlanButton() {
-  $('#plan-btn').animate({
+function highlightButton(element) {
+  $(element).animate({
     opacity: '.3'
   }, 50).effect("bounce", "fast").animate({
     opacity: '1'
   }, 50).effect("highlight", "fast")
+}
+
+function standoutButton (element) {
+  $(element).effect("pulsate", { times: 1 }, 300)
+}
+
+// highlight add button to let users know they clicked on it
+function shakeButton(element) {
+  $(element).effect('shake', { direction: "right", times: 1.5, distance: 5 }, 300)
 }
 
 // print yoga plan 
@@ -251,17 +261,14 @@ function showAdvice() {
   $('#plan-advice').remove()
   if ($('.chosen').length === 0) {
     $('#preview-btn, #print-btn').fadeOut('fast')
-    $("#plan").append(
+    $("#inner-plan").append(
       `<h4 id="plan-advice">Add poses to your plan by clicking on this icon<span class="add-btn" > <img  class="icon" src="assets/add_icon.svg"></span> </h4>`
     )
     $('#plan-advice').hide().fadeIn(1000)
   }
 }
 
-// highlight add button to let users know they clicked on it
-function shakeButton(element) {
-  $(element).effect('shake', { direction: "right", times: 1.5, distance: 5 }, 300)
-}
+
 
 $("#plan-btn").click(function () {
   //hide del buttons
