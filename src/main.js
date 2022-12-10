@@ -252,6 +252,7 @@ function printPlan() {
 $("#close-plan-btn, #blurry-bg").click(() => {
   $("#plan, #blurry-bg").fadeOut(function (){
     $("#gridview-btn").trigger('click')
+    $('body').css({ 'overflow': 'scroll' })
   });
   // removeSlider()
 })
@@ -271,9 +272,8 @@ function showAdvice() {
 
 
 $("#plan-btn").click(function () {
-  //hide del buttons
-  // $('#plan .del-btn').hide()
-
+  // hides body's scroll
+  $('body').css({ 'overflow': 'hidden' })
   //taphold event
   $(".chosen").on("taphold", { duration: 1000 }, function (event) {
     // in case the user taphold more than once before doubletapping
@@ -281,15 +281,11 @@ $("#plan-btn").click(function () {
     $("#selected-poses").sortable({
       disabled: true
     });
-
     $(".chosen").addClass("taphold");
     // shakeButton('.chosen')
     $("#selected-poses").sortable({
       disabled: false
     });
-
-    // show del buttons
-    // $('#plan .del-btn').fadeIn()
   })
 
   $(".chosen").on("doubletap", function () {
@@ -297,8 +293,6 @@ $("#plan-btn").click(function () {
     $("#selected-poses").sortable({
       disabled: true
     });
-    // hide del buttons
-    // $('#plan .del-btn').fadeOut()
   });
 
   //just in case users click anywhere else before doubletapping
@@ -341,8 +335,6 @@ $("#plan-btn").click(function () {
     $('#preview-btn').hide()
   }
 })
-
-
 
 //slideshow 
 $("#preview-btn").click(function () {
