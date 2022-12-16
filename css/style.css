@@ -213,7 +213,7 @@ main {
 .pose,
 .counter-pose {
   margin: 3px;
-  background-color: #fafafa;
+  background-color: #eee;
   border-radius: 10px;
   position: relative;
 }
