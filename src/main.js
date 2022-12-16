@@ -72,7 +72,7 @@ function disableRightClick() {
 disableRightClick()
 
 //load poses
-let poses = []
+let poses = {}
 
 async function loadPoses() {
   await axios
@@ -385,6 +385,7 @@ $("#gridview-btn").click(function () {
   //switch button
   $("#gridview-btn").fadeOut('fast', function () {
     $('#preview-btn, #print-btn, #save-btn, #delete-btn, #edit-btn').fadeIn('fast')
+    $(".gallery .del-btn").show()
     removeSlider()
   })
 
